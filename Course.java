@@ -152,7 +152,7 @@ public class Course {
         this.priority = priority;
     }
 
-    public List<Course> getPrerequisites() {
+    public ArrayList<Course> getPrerequisites() {
         return prerequisites;
     }
 
@@ -160,7 +160,7 @@ public class Course {
         this.prerequisites = prerequisites;
     }
 
-    public List<Course> getCorequistes() {
+    public ArrayList<Course> getCorequistes() {
         return corequistes;
     }
 
@@ -240,7 +240,7 @@ public class Course {
         this.avgGPA = avgGPA;
     }
 
-    public List<String> getInstructors() {
+    public ArrayList<String> getInstructors() {
         return instructors;
     }
 
@@ -248,7 +248,7 @@ public class Course {
         this.instructors = instructors;
     }
 
-    public List<String> getConcepts() {
+    public ArrayList<String> getConcepts() {
         return concepts;
     }
 
@@ -256,7 +256,7 @@ public class Course {
         this.concepts = concepts;
     }
 
-    public List<String> getBooks() {
+    public ArrayList<String> getBooks() {
         return books;
     }
 
