@@ -4,7 +4,7 @@ class Profile{
 	private int yearEnrolled
 	private int expectedGraduationYear
 	private int age
-	private Long id
+	private int id
 	private String gender
 	private Graph schedule
 	private List currentEnrolledClasses
@@ -37,7 +37,7 @@ class Profile{
 
 	public Profile(double gpa, int numberOfUnits, int yearEnrolled, 
 					int expectedGraduationYear, int age, 
-					Long id, String gender, Graph schedule, 
+					int id, String gender, Graph schedule, 
 					List currentEnrolledClasses, List completedClasses,
 					List awards, Long profilePicturId,
 					String bio,String email){
@@ -99,11 +99,11 @@ class Profile{
 		this.age = age;
 	}
 
-	public Long getId(){
+	public int getId(){
 		return id;
 	}
 
-	public void setId(Long id){
+	public void setId(int id){
 		this.id = id;
 	}
 
