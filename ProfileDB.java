@@ -1,21 +1,33 @@
 import java.util.Hashtable;
 class ProfileDB {
   private Hashtable<Integer, Profile> profiles;
+  private Hashtable<String, Integer> stringTable;
   
   public ProfileDB(){
     profiles = new Hashtable<Integer, Profile>();
+    stringTable = new Hashtable<String, Integer>();
   }
   
-  public Profile search(int id){
-    return profiles.get((Integer) id);
+  public Profile search(Integer id){
+    return profiles.get(id);
   }
-  public void add(int id, Profile prof){
-    profiles.put((Integer) id, prof);
+  public Profile search(String name){
+    return profiles.get(stringTable.get(name));
   }
-  public Hashtable export(){
+  public void add(Profile prof){
+    profiles.put(prof.getId(), prof);
+    stringTable.put(prof.getName(), prof.getId());
+  }
+
+  public void remove(Integer id){
+    String profileName = profiles.remove(id).getName();
+    stringTable.remove(profileName);
+  }
+  public void remove(String profileName){
+    profiles.remove(stringTable.get(profileName));
+    stringTable.remove(profileName);
+  }
+    public Hashtable export(){
     return profiles;
-  }
-  public void remove(int id){
-   profiles.remove(id);
   }
 }
