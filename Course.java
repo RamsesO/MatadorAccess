@@ -128,11 +128,11 @@ public class Course {
         this.department = department;
     }
 
-    public int getCouseNum() {
+    public int getCourseNum() {
         return courseNum;
     }
 
-    public void setCouseNum(int couseNum) {
+    public void setCourseNum(int couseNum) {
         this.courseNum = couseNum;
     }
 
