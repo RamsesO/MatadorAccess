@@ -5,6 +5,11 @@ class CourseDB {
     private Hashtable<String, Integer> stringTable;
     private Hashtable<Integer, Course> courses;
     
+    public CouseDB() {
+        this.stringTable = new Hashtable<String, Integer>();
+        this.courses = new Hashtable<Integer, Course>();
+    }
+    
     public Course search(Integer id) {
         return courses.get(id);
     }
