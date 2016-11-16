@@ -10,8 +10,8 @@ public class Course {
     private int courseNum;
     private int units;
     private int priority;
-    private ArrayList<Course> prerequisites;
-    private ArrayList<Course> corequistes;
+    private ArrayList<Integer> prerequisites;
+    private ArrayList<Integer> corequistes;
     
     //Statistical Stuff
     private int avgCourseSize; 
@@ -55,7 +55,7 @@ public class Course {
     
     //Constructor with Important stuff as input
     public Course(String name, String department, int courseNum, int units, 
-            int priority, ArrayList<Course> prerequisites, ArrayList<Course> corequistes) {
+            int priority, ArrayList<Integer> prerequisites, ArrayList<Integer> corequistes) {
         //Main Stuff
         this.name = name;
         this.department = department;
@@ -82,7 +82,7 @@ public class Course {
     
     //Constructor with everything as an input
     public Course(String name, String department, int courseNum, int units,
-            int priority, ArrayList<Course> prerequisites, ArrayList<Course> corequistes,
+            int priority, ArrayList<Integer> prerequisites, ArrayList<Integer> corequistes,
             int avgCourseSize, int avgSections, int avgNumSWL, double avgPassRate,
             double avgGrade, double diffRating, double genRatioF, double avgGPA,
             ArrayList<String> instructors, ArrayList<String> concepts, ArrayList<String> books) {
@@ -128,11 +128,11 @@ public class Course {
         this.department = department;
     }
 
-    public int getCourseNum() {
+    public int getCouseNum() {
         return courseNum;
     }
 
-    public void setCourseNum(int couseNum) {
+    public void setCouseNum(int couseNum) {
         this.courseNum = couseNum;
     }
 
@@ -152,19 +152,19 @@ public class Course {
         this.priority = priority;
     }
 
-    public ArrayList<Course> getPrerequisites() {
+    public ArrayList<Integer> getPrerequisites() {
         return prerequisites;
     }
 
-    public void setPrerequisites(ArrayList<Course> prerequisites) {
+    public void setPrerequisites(ArrayList<Integer> prerequisites) {
         this.prerequisites = prerequisites;
     }
 
-    public ArrayList<Course> getCorequistes() {
+    public ArrayList<Integer> getCorequistes() {
         return corequistes;
     }
 
-    public void setCorequistes(ArrayList<Course> corequistes) {
+    public void setCorequistes(ArrayList<Integer> corequistes) {
         this.corequistes = corequistes;
     }
 
@@ -266,7 +266,7 @@ public class Course {
     
     //Special Setters
     public void setMainStuff(String name, String department, int courseNum, int units, 
-            int priority, ArrayList<Course> prerequisites, ArrayList<Course> corequistes) {
+            int priority, ArrayList<Integer> prerequisites, ArrayList<Integer> corequistes) {
         this.name = name;
         this.department = department;
         this.courseNum = this.courseNum;
@@ -277,7 +277,7 @@ public class Course {
     }
     
     public void setAllStuff(String name, String department, int courseNum, int units,
-            int priority, ArrayList<Course> prerequisites, ArrayList<Course> corequistes,
+            int priority, ArrayList<Integer> prerequisites, ArrayList<Integer> corequistes,
             int avgCourseSize, int avgSections, int avgNumSWL, double avgPassRate,
             double avgGrade, double diffRating, double genRatioF, double avgGPA,
             ArrayList<String> instructors, ArrayList<String> concepts, ArrayList<String> books) {
@@ -291,18 +291,18 @@ public class Course {
         this.corequistes = corequistes;
         
         //Statistical Stuff
-        this.avgCourseSize = 0;
-        this.avgSections = 0;
-        this.avgNumSWL = 0;
-        this.avgPassRate = 0.0;
-        this.avgGrade = 0.0;
-        this.diffRating = 0.0;
-        this.genRatioF = 0.0;
-        this.genRatioM = 0.0;
-        this.avgGPA = 0.0;
-        this.instructors = null;
-        this.concepts = null;
-        this.books = null; 
+        this.avgCourseSize = avgCourseSize;
+        this.avgSections = avgSections;
+        this.avgNumSWL = avgNumSWL;
+        this.avgPassRate = avgPassRate;
+        this.avgGrade = avgGrade;
+        this.diffRating = diffRating;
+        this.genRatioF = genRatioF;
+        this.genRatioM = 1.0 - genRatioF;
+        this.avgGPA = avgGPA;
+        this.instructors = instructors;
+        this.concepts = concepts;
+        this.books = books; 
     }
     
     //Display function
