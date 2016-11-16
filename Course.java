@@ -10,8 +10,8 @@ public class Course {
     private int courseNum;
     private int units;
     private int priority;
-    private ArrayList<Integer> prerequisites;
-    private ArrayList<Integer> corequistes;
+    private ArrayList<String> prerequisites;
+    private ArrayList<String> corequistes;
     
     //Statistical Stuff
     private int avgCourseSize; 
@@ -55,7 +55,7 @@ public class Course {
     
     //Constructor with Important stuff as input
     public Course(String name, String department, int courseNum, int units, 
-            int priority, ArrayList<Integer> prerequisites, ArrayList<Integer> corequistes) {
+            int priority, ArrayList<String> prerequisites, ArrayList<String> corequistes) {
         //Main Stuff
         this.name = name;
         this.department = department;
@@ -82,7 +82,7 @@ public class Course {
     
     //Constructor with everything as an input
     public Course(String name, String department, int courseNum, int units,
-            int priority, ArrayList<Integer> prerequisites, ArrayList<Integer> corequistes,
+            int priority, ArrayList<String> prerequisites, ArrayList<String> corequistes,
             int avgCourseSize, int avgSections, int avgNumSWL, double avgPassRate,
             double avgGrade, double diffRating, double genRatioF, double avgGPA,
             ArrayList<String> instructors, ArrayList<String> concepts, ArrayList<String> books) {
@@ -152,19 +152,19 @@ public class Course {
         this.priority = priority;
     }
 
-    public ArrayList<Integer> getPrerequisites() {
+    public ArrayList<String> getPrerequisites() {
         return prerequisites;
     }
 
-    public void setPrerequisites(ArrayList<Integer> prerequisites) {
+    public void setPrerequisites(ArrayList<String> prerequisites) {
         this.prerequisites = prerequisites;
     }
 
-    public ArrayList<Integer> getCorequistes() {
+    public ArrayList<String> getCorequistes() {
         return corequistes;
     }
 
-    public void setCorequistes(ArrayList<Integer> corequistes) {
+    public void setCorequistes(ArrayList<String> corequistes) {
         this.corequistes = corequistes;
     }
 
@@ -266,7 +266,7 @@ public class Course {
     
     //Special Setters
     public void setMainStuff(String name, String department, int courseNum, int units, 
-            int priority, ArrayList<Integer> prerequisites, ArrayList<Integer> corequistes) {
+            int priority, ArrayList<String> prerequisites, ArrayList<String> corequistes) {
         this.name = name;
         this.department = department;
         this.courseNum = this.courseNum;
@@ -277,7 +277,7 @@ public class Course {
     }
     
     public void setAllStuff(String name, String department, int courseNum, int units,
-            int priority, ArrayList<Integer> prerequisites, ArrayList<Integer> corequistes,
+            int priority, ArrayList<String> prerequisites, ArrayList<String> corequistes,
             int avgCourseSize, int avgSections, int avgNumSWL, double avgPassRate,
             double avgGrade, double diffRating, double genRatioF, double avgGPA,
             ArrayList<String> instructors, ArrayList<String> concepts, ArrayList<String> books) {
