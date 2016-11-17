@@ -45,6 +45,7 @@ class ProfileDB {
       br = new BufferedReader(new FileReader(csvFile));
       while((line = br.readLine()) != null){
         String[] profile = line.split(splitBy);
+        
       }
     } catch (FileNotFoundException e) {
             e.printStackTrace();
