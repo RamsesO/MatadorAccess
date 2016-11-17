@@ -1,4 +1,11 @@
 import java.util.Hashtable;
+import java.lang.File;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+
 class ProfileDB {
   private Hashtable<Integer, Profile> profiles;
   private Hashtable<String, Integer> stringTable;
@@ -27,7 +34,30 @@ class ProfileDB {
     profiles.remove(stringTable.get(profileName));
     stringTable.remove(profileName);
   }
-    public Hashtable export(){
+  public Hashtable export(){
     return profiles;
+  }
+  public void importProfiles(String csvFile){
+    BufferredReader reader = null;
+    String line = "";
+    String splitBy = ",";
+    try{
+      br = new BufferedReader(new FileReader(csvFile));
+      while((line = br.readLine()) != null){
+        String[] profile = line.split(splitBy);
+      }
+    } catch (FileNotFoundException e) {
+            e.printStackTrace();
+    } catch (IOException e) {
+            e.printStackTrace();
+    } finally {
+        if (br != null) {
+           try {
+               br.close();
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+        }
+     } 
   }
 }
