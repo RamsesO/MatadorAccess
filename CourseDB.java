@@ -1,6 +1,7 @@
 import java.util.Hashtable;
+import java.io.Serializable;
 
-class CourseDB {
+class CourseDB implements Serializable{
     
     private Hashtable<String, Integer> stringTable;
     private Hashtable<Integer, Course> courses;
