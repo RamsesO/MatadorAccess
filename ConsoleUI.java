@@ -1,10 +1,55 @@
 //Lemuel Dizon
 
 import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class ConsoleUI {
    
     public static void main(String[] args) {
+        
+        //initialize databases 
+        CourseDB courses;
+        MajorDB majors;
+        ProfileDB profiles;
+        
+        //read all database files and import persistent data
+        try (
+            FileInputStream readcourses = new FileInputStream("cdb.dat");
+            FileInputStream readmajors = new FileInputStream("mdb.dat");
+            FileInputStream readprofiles = new FileInputStream("pdb.dat")
+            )
+        {
+            ObjectInputStream importcourses = new ObjectInputStream(readcourses);
+            courses = (CourseDB)readcourses.readObject();
+            readcourses.close();
+            
+            ObjectInputStream importmajors = new ObjectInputStream(readmajors);
+            majors = (MajorDB)readmajors.readObject();
+            readmajors.close();
+            
+            ObjectInputStream importprofiles = new ObjectInputStream(readprofiles);
+            profiles = (ProfileDB)readprofiles.readObject();
+            readprofiles.close(); 
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("ERROR: Database file not found.\n");
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            System.out.println("ERROR: Unable to read database file.\n");
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e) {
+            System.out.println("ERROR: Invalid database type.\n");
+            e.printStackTrace();
+        }
+            
+            
         Scanner input = new Scanner(System.in);
         int credential = 0;
         int option = 0;
@@ -145,6 +190,33 @@ public class ConsoleUI {
             
         }
         
+        //write all changes to persistent data and save databases to files
+        try (
+            FileOutputStream writecourses = new FileOutputStream(cdb.dat);
+            FileOutputStream writemajors = new FileOutputStream(mdb.dat);
+            FileOutputStream writeprofiles = new FileOutputStream(pdb.dat);
+            )
+        {
+            ObjectOutputStream exportcourses = new ObjectOutputStream(writecourses);
+            exportcourses.writeObject(courses);
+            exportcourses.close();
+            
+            ObjectOutputStream exportmajors = new ObjectOutputStream(writemajors);
+            exportmajors.writeObject(majors);
+            exportmajors.close();
+            
+            ObjectOutputStream exportprofiles = new ObjectOutputStream(writeprofiles);
+            exportprofiles.writeObject(profiles);
+            exportprofiles.close();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("ERROR: Unable to write database file\n");
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            System.out.println("ERROR: Unable to write database file\n");
+            e.printStackTrace();
+        }    
     }
 
     private static void viewCourseStatistics() {
