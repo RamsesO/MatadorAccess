@@ -1,7 +1,10 @@
 import java.util.Hashtable;
+import java.io.Serializable;
 
-class MajorDB {
+class MajorDB implements Serializable{
 
+    private static final long serialVersionUID = 9184085222891215235L;
+    
     private Hashtable<Integer, Major> major;
     
     public Major search(Integer id) {
@@ -9,11 +12,11 @@ class MajorDB {
     }
     
     public void add(Integer id, Major m) {
-        courses.put(id, m);
+        major.put(id, m);
     }
     
     public void delete(Integer id, Major m) {
-        courses.remove(id, m);
+        major.remove(id, m);
     }
     
     public Hashtable<Integer, Major> export() {
