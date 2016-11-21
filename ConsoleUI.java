@@ -13,9 +13,9 @@ public class ConsoleUI {
     public static void main(String[] args) {
         
         //initialize databases 
-        CourseDB courses;
-        MajorDB majors;
-        ProfileDB profiles;
+        CourseDB courses = null;
+        MajorDB majors = null;
+        ProfileDB profiles = null;
         
         //read all database files and import persistent data
         try (
@@ -25,15 +25,15 @@ public class ConsoleUI {
             )
         {
             ObjectInputStream importcourses = new ObjectInputStream(readcourses);
-            courses = (CourseDB)readcourses.readObject();
+            courses = (CourseDB)importcourses.readObject();
             readcourses.close();
             
             ObjectInputStream importmajors = new ObjectInputStream(readmajors);
-            majors = (MajorDB)readmajors.readObject();
+            majors = (MajorDB)importmajors.readObject();
             readmajors.close();
             
             ObjectInputStream importprofiles = new ObjectInputStream(readprofiles);
-            profiles = (ProfileDB)readprofiles.readObject();
+            profiles = (ProfileDB)importprofiles.readObject();
             readprofiles.close(); 
         }
         catch (FileNotFoundException e) {
@@ -190,11 +190,13 @@ public class ConsoleUI {
             
         }
         
+        input.close();
+        
         //write all changes to persistent data and save databases to files
         try (
-            FileOutputStream writecourses = new FileOutputStream(cdb.dat);
-            FileOutputStream writemajors = new FileOutputStream(mdb.dat);
-            FileOutputStream writeprofiles = new FileOutputStream(pdb.dat);
+            FileOutputStream writecourses = new FileOutputStream("cdb.dat");
+            FileOutputStream writemajors = new FileOutputStream("mdb.dat");
+            FileOutputStream writeprofiles = new FileOutputStream("pdb.dat");
             )
         {
             ObjectOutputStream exportcourses = new ObjectOutputStream(writecourses);

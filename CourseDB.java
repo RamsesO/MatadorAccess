@@ -3,10 +3,12 @@ import java.io.Serializable;
 
 class CourseDB implements Serializable{
     
+    private static final long serialVersionUID = 1902501367567782416L;
+
     private Hashtable<String, Integer> stringTable;
     private Hashtable<Integer, Course> courses;
     
-    public CouseDB() {
+    public CourseDB() {
         this.stringTable = new Hashtable<String, Integer>();
         this.courses = new Hashtable<Integer, Course>();
     }
@@ -30,7 +32,7 @@ class CourseDB implements Serializable{
     }
     
     public void delete(String name) {
-        courses.remove(stringTable.get(name).getCourseNum());
+        courses.remove(stringTable.get(name));
         stringTable.remove(name);
     }
     

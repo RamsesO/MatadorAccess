@@ -128,12 +128,12 @@ public class Course {
         this.department = department;
     }
 
-    public int getCouseNum() {
+    public int getCourseNum() {
         return courseNum;
     }
 
-    public void setCouseNum(int couseNum) {
-        this.courseNum = couseNum;
+    public void setCourseNum(int courseNum) {
+        this.courseNum = courseNum;
     }
 
     public int getUnits() {
