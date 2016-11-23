@@ -101,6 +101,49 @@ class MajorDB implements Serializable{
     
     public void manageMajor() {
         System.out.println("Manage Major is not implemented yet");
-    }	
+    }
+    public void importData(String filename) {
+        try {
+            BufferedReader input = new BufferedReader(new FileReader(filename));
+            String line;
+            String[] parsedData;
+            String[] subset;
+            Major temp;
+            
+            //Skip first line
+            input.readLine();
+            line = null;
+            
+            while((line = input.readLine()) != null) {
+                parsedData = line.split(",");
+                temp = new Major();
+                
+                temp.setMajorId(Integer.parseInt(parsedData[0]));
+                
+                temp.setAverageTime(Integer.parseInt(parsedData[1]));
+                temp.setAverageSalary(Integer.parseInt(parsedData[2]));
+                temp.setNumberOfStudents(Integer.parseInt(parsedData[3]));
+                temp.setMaleStudents(Integer.parseInt(parsedData[4]));
+                temp.setFemaleStudents(Integer.parseInt(parsedData[5]));
+                temp.setDifficultyRating(Double.parseDouble(parsedData[6]));
+                temp.setMajorName(parsedData[7]);
+                int numberOfMales = Integer.parseInt(parsedData[4]);
+                int numberOfFemales = Integer.parseInt(parsedData[5]);
+                temp.setGenderRatio(numberOfMales, numberOfFemales);
+                temp.setDescription(parsedData[8]);
+                subset = parsedData[9].split(";");
+                temp.setRelatedJobs(new ArrayList<String>(Arrays.asList(subset)));
+                subset = parsedData[10].split(";");
+                temp.setCourses(new ArrayList<String>(Arrays.asList(subset)));
+                
+                
+                add(temp);
+            }
+        } 
+        catch (IOException e) {
+            System.out.println("Error: File Not Found");
+        }
+    }
+    
     
 }
