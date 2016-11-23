@@ -119,8 +119,7 @@ public class Major {
         return genderRatio;
     }
 
-    public void setGenderRatio(int maleStudents, int femaleStudents, 
-            String genderRatio) {
+    public void setGenderRatio(int maleStudents, int femaleStudents) {
         int gcd = 0;
         if (maleStudents > femaleStudents) {
             gcd = GCD(femaleStudents, maleStudents);
@@ -130,7 +129,7 @@ public class Major {
         }
         maleStudents /= gcd;
         femaleStudents /= gcd;
-        genderRatio = maleStudents + " : " + femaleStudents;
+        String genderRatio = maleStudents + " : " + femaleStudents;
         this.genderRatio = genderRatio;
 
     }
