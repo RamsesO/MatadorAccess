@@ -5,22 +5,39 @@ class MajorDB implements Serializable{
 
     private static final long serialVersionUID = 9184085222891215235L;
     
-    private Hashtable<Integer, Major> major;
+    private Hashtable<String, Integer> stringTable;
+    private Hashtable<Integer, Major> majors;
+    
+    public MajorDB() {
+        this.stringTable = new Hashtable<String, Integer>();
+        this.majors = new Hashtable<Integer, Major>();
+    }
     
     public Major search(Integer id) {
-        return major.get(id);
+        return majors.get(id);
     }
     
-    public void add(Integer id, Major m) {
-        major.put(id, m);
+    public Major search(String name) {
+        return majors.get(stringTable.get(name));
     }
     
-    public void delete(Integer id, Major m) {
-        major.remove(id, m);
+    public void add(Major mjr) {
+        majors.put(mjr.getMajorId(), mjr);
+        stringTable.put(mjr.getMajorName(), mjr.getMajorId());
+    }
+    
+    public void delete(Integer id) {
+        stringTable.remove(majors.get(id).getMajorId());
+        majors.remove(id);
+    }
+    
+    public void delete(String name) {
+        majors.remove(stringTable.get(name));
+        stringTable.remove(name);
     }
     
     public Hashtable<Integer, Major> export() {
-        return major;
+        return majors;
     }
     
 }
