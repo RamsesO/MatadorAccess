@@ -1,6 +1,5 @@
-import java.util.Hashtable;
-import java.io.Serializable;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 class CourseDB implements Serializable {
     
@@ -102,6 +101,55 @@ class CourseDB implements Serializable {
 
     public void manageCourse() {
         System.out.println("Manage Course is not implemented yet");
+    }
+    
+    public void importData(String filename) {
+        try {
+            BufferedReader input = new BufferedReader(new FileReader(filename));
+            String line;
+            String[] parsedData;
+            String[] subset;
+            Course temp;
+            while((line = input.readLine()) != null) {
+                parsedData = line.split(",");
+                temp = new Course();
+                
+                temp.setName(parsedData[0]);
+                temp.setDepartment(parsedData[1]);
+                
+                temp.setCourseNum(Integer.parseInt(parsedData[2]));
+                temp.setUnits(Integer.parseInt(parsedData[3]));
+                temp.setPriority(Integer.parseInt(parsedData[4]));
+                
+                subset = parsedData[5].split(";");
+                temp.setPrerequisites((ArrayList<String>) Arrays.asList(subset));
+                subset = parsedData[6].split(";");
+                temp.setCorequistes((ArrayList<String>) Arrays.asList(subset));
+                
+                temp.setAvgCourseSize(Integer.parseInt(parsedData[7]));
+                temp.setAvgSections(Integer.parseInt(parsedData[8]));
+                temp.setAvgNumSWL(Integer.parseInt(parsedData[9]));
+                
+                temp.setAvgPassRate(Double.parseDouble(parsedData[10]));
+                temp.setAvgGrade(Double.parseDouble(parsedData[11]));
+                temp.setDiffRating(Double.parseDouble(parsedData[12]));
+                temp.setGenRatioF(Double.parseDouble(parsedData[13]));
+                temp.setGenRatioM(Double.parseDouble(parsedData[14]));
+                temp.setAvgGPA(Double.parseDouble(parsedData[15]));
+                
+                subset = parsedData[16].split(";");
+                temp.setInstructors((ArrayList<String>) Arrays.asList(subset));
+                subset = parsedData[17].split(";");
+                temp.setConcepts((ArrayList<String>) Arrays.asList(subset));
+                subset = parsedData[18].split(";");
+                temp.setBooks((ArrayList<String>) Arrays.asList(subset));
+                
+                add(temp);
+            }
+        } 
+        catch (IOException e) {
+            System.out.println("Error: File Not Found");
+        }
     }
     
 }
