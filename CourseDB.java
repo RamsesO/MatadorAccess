@@ -1,7 +1,7 @@
 import java.util.Hashtable;
 import java.io.Serializable;
 
-class CourseDB implements Serializable{
+class CourseDB implements Serializable {
     
     private static final long serialVersionUID = 1902501367567782416L;
 
@@ -35,6 +35,18 @@ class CourseDB implements Serializable{
         courses.remove(stringTable.get(name));
         stringTable.remove(name);
     }
+	
+	public void viewClassStatistics() {
+		
+	}
+	
+	public void manageCourse() {
+		
+	}
+	
+	private void modifyCourse() {
+		
+	}
     
     public Hashtable<Integer, Course> export() {
         return courses;
