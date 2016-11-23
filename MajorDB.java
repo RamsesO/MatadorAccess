@@ -1,5 +1,5 @@
-import java.util.Hashtable;
-import java.io.Serializable;
+import java.util.*;
+import java.io.*;
 
 class MajorDB implements Serializable{
 
@@ -41,7 +41,62 @@ class MajorDB implements Serializable{
     }
 	
     public void viewMajorInformation() {
-        System.out.println("View Major Information is not implemented yet");
+    	Scanner input = new Scanner(System.in);
+    	Major temp = null;
+    	String name = "";
+    	int id = 0;
+    	int option = 0;
+    	
+    	while(temp == null) {
+    		System.out.print("Enter a name or number: ");
+    		if(!input.hasNextInt()) {
+    			name = input.nextLine();
+    			temp = search(name);
+    			if(temp == null) {
+    				System.out.println("Major not found");
+    				System.out.println("1) Search again");
+    				System.out.println("2) Exit");
+    				
+    				while(!input.hasNextInt()) {
+    					System.out.print("Please enter a number: ");
+    					input.next();
+    				}
+    				option = input.nextInt();
+    				
+    				while(option != 1 && option != 2) {
+    					System.out.println("Invalid command please enter 1 or 2: ");
+    					option = input.nextInt();
+    				}
+    				if(option == 2) break;
+    			}
+    		}
+    		else {
+    			id = input.nextInt();
+    			temp = search(id);
+    			
+    			if(temp == null) {
+    				System.out.println("Major not found");
+    				System.out.println("1) Search again");
+    				System.out.println("2) Exit");
+    				
+    				while(!input.hasNextInt()) {
+    					System.out.print("Please enter a number: ");
+    					input.next();
+    				}
+    				option = input.nextInt();
+    				
+    				while(option != 1 && option != 2) {
+    					System.out.println("Invalid command please enter 1 or 2: ");
+    					option = input.nextInt();
+    				}
+    				if(option == 2) break;
+    			}
+    		}
+    	}
+    	if(temp != null) {
+    		System.out.println(temp.toString());
+    	}
+        
     }
     
     public void manageMajor() {
