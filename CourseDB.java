@@ -110,6 +110,11 @@ class CourseDB implements Serializable {
             String[] parsedData;
             String[] subset;
             Course temp;
+            
+            //Skip first line
+            input.readLine();
+            line = null;
+            
             while((line = input.readLine()) != null) {
                 parsedData = line.split(",");
                 temp = new Course();
@@ -122,9 +127,9 @@ class CourseDB implements Serializable {
                 temp.setPriority(Integer.parseInt(parsedData[4]));
                 
                 subset = parsedData[5].split(";");
-                temp.setPrerequisites((ArrayList<String>) Arrays.asList(subset));
+                temp.setPrerequisites(new ArrayList<String>(Arrays.asList(subset)));
                 subset = parsedData[6].split(";");
-                temp.setCorequistes((ArrayList<String>) Arrays.asList(subset));
+                temp.setCorequistes(new ArrayList<String>(Arrays.asList(subset)));
                 
                 temp.setAvgCourseSize(Integer.parseInt(parsedData[7]));
                 temp.setAvgSections(Integer.parseInt(parsedData[8]));
@@ -138,11 +143,11 @@ class CourseDB implements Serializable {
                 temp.setAvgGPA(Double.parseDouble(parsedData[15]));
                 
                 subset = parsedData[16].split(";");
-                temp.setInstructors((ArrayList<String>) Arrays.asList(subset));
+                temp.setInstructors(new ArrayList<String>(Arrays.asList(subset)));
                 subset = parsedData[17].split(";");
-                temp.setConcepts((ArrayList<String>) Arrays.asList(subset));
+                temp.setConcepts(new ArrayList<String>(Arrays.asList(subset)));
                 subset = parsedData[18].split(";");
-                temp.setBooks((ArrayList<String>) Arrays.asList(subset));
+                temp.setBooks(new ArrayList<String>(Arrays.asList(subset)));
                 
                 add(temp);
             }
