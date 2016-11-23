@@ -132,8 +132,8 @@ public class Course {
         return courseNum;
     }
 
-    public void setCourseNum(int courseNum) {
-        this.courseNum = courseNum;
+    public void setCourseNum(int couseNum) {
+        this.courseNum = couseNum;
     }
 
     public int getUnits() {
@@ -315,11 +315,11 @@ public class Course {
                 "Average Couse Size: " + avgCourseSize + "\n" +
                 "Average Sections Available per Semester: " + avgSections + "\n" +
                 "Average Number of Students in Waitlist: " + avgNumSWL + "\n" +
-                "Average Pass Rate: " + avgPassRate + "\n" +
-                "Average Grade (in percentage): " + avgGrade + "\n" +
-                "Difficulty Rating: " + diffRating + "\n" +
-                "Percentage of Females: " + genRatioF + "\n" +
-                "Percentage of Males: " + genRatioM + "\n" +
+                "Average Pass Rate: " + (avgPassRate * 100) + "% \n" +
+                "Average Grade (in percentage): " + (avgGrade * 100) + "% \n" +
+                "Difficulty Rating: " + (diffRating * 100) + "% \n" +
+                "Percentage of Females: " + (genRatioF * 100) + "% \n" +
+                "Percentage of Males: " + (genRatioM * 100) + "% \n" +
                 "Average GPA of Students who take this course: " + avgGPA + "\n" +
                 "Instructors who teach this course: " + nullCheck(instructors) + "\n" +
                 "Concepts covered: " + nullCheck(concepts) + "\n" +
@@ -336,16 +336,4 @@ public class Course {
         }
     }
 
-/*    
-    public static void main(String[] args) {
-        Course comp333 = new Course();
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("Banana");
-        list.add("Banana");
-        list.add("Banana");
-        
-        comp333.setBooks(list);
-        System.out.println(comp333.toString());
-    }
-*/
 }
