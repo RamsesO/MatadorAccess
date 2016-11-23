@@ -1,12 +1,7 @@
 //Lemuel Dizon
 
 import java.util.Scanner;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class ConsoleUI {
    
@@ -17,7 +12,7 @@ public class ConsoleUI {
         MajorDB majors = null;
         ProfileDB profiles = null;
         
-        //read all database files and import persistent data
+        /*
         try (
             FileInputStream readcourses = new FileInputStream("cdb.dat");
             FileInputStream readmajors = new FileInputStream("mdb.dat");
@@ -48,7 +43,10 @@ public class ConsoleUI {
             System.out.println("ERROR: Invalid database type.\n");
             e.printStackTrace();
         }
-            
+        */
+        
+        courses = new CourseDB();
+        courses.importData("sample.csv");
             
         Scanner input = new Scanner(System.in);
         int credential = 0;
@@ -204,7 +202,7 @@ public class ConsoleUI {
         
         input.close();
         
-        //write all changes to persistent data and save databases to files
+        /*
         try (
             FileOutputStream writecourses = new FileOutputStream("cdb.dat");
             FileOutputStream writemajors = new FileOutputStream("mdb.dat");
@@ -230,7 +228,8 @@ public class ConsoleUI {
         catch (IOException e) {
             System.out.println("ERROR: Unable to write database file\n");
             e.printStackTrace();
-        }    
+        }
+        */
     }
 
     private static int login() {
