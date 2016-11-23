@@ -161,4 +161,21 @@ public class Major {
     private int GCD(int smallerInt, int largerInt) {
         return largerInt == 0 ? smallerInt : GCD(largerInt, smallerInt % largerInt);
     }
+    @Override
+    public String toString() {
+    	String str = "Major: " + this.majorName + "\n" +
+    			"Major ID: " + this.majorId + "\n" +
+    			"Average Salary: " + this.averageSalary + "\n" +
+    			"Average Time: " + this.averageTime + "\n" +
+    			"Number Of Students: " + this.numberOfStudents + "\n" +
+    			"Number of Male Students: " + this.maleStudents + "\n" +
+    			"Number of Female Students: " + this.femaleStudents + "\n" +
+    			"Gender Ratio: " + this.genderRatio+ "\n" +
+    			"Difficulty Rating: " + this.difficultyRating + "\n" +
+    			"Related Jobs: " + this.relatedJobs + "\n" +
+    			"Courses: " + this.courses + "\n" +
+    			"Description: " + this.description + "\n";
+    	return str;
+    	
+    }
 }
