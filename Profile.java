@@ -1,190 +1,194 @@
+
+import java.util.ArrayList;
+
 class Profile{
-	private double gpa
-	private int numberOfUnits
-	private int yearEnrolled
-	private int expectedGraduationYear
-	private int age
-	private int id
-	private String gender
-	private Graph schedule
-	private List currentEnrolledClasses
-	private List completedClasses
-	private List awards
-	private Long profilePicturId
-	private Major declaredMajor
-	private String bio
-	private String email
+    
+    private double gpa;
+    private int numberOfUnits;
+    private int yearEnrolled;
+    private int expectedGraduationYear;
+    private int age;
+    private int id;
+    private long profilePicturId;
+    private String name;
+    private String gender;
+    private String bio;
+    private String email;
+    private String declaredMajor;
+    private ArrayList<String> schedule;
+    private ArrayList<String> currentEnrolledClasses;
+    private ArrayList<String> completedClasses;
+    private ArrayList<String> awards;
 
-	public Profile(){
-		this.gpa = 0.0;
-		this.numberOfUnits = 0;
-		this.yearEnrolled = 0;
-		this.expectedGraduationYear = 0;
-		this.age = 0;
-		this.id = 0;
-		this.gender = "";
-		this.schedule = null;
-		this.currentEnrolledClasses = null;
-		this.completedClasses = null;
-		this.awards = null;
-		this.profilePicturId = 0;
-		this.declaredMajor = null;
-		this.bio = "";
-		this.email = "";
+    public Profile(){
+        this.gpa = 0.0;
+        this.numberOfUnits = 0;
+        this.yearEnrolled = 0;
+        this.expectedGraduationYear = 0;
+        this.age = 0;
+        this.id = 0;
+        this.profilePicturId = 0;
+        this.name = "";
+        this.gender = "";
+        this.bio = "";
+        this.email = "";
+        this.declaredMajor = "";
+        this.schedule = null;
+        this.currentEnrolledClasses = null;
+        this.completedClasses = null;
+        this.awards = null;
+    }
 
+    public Profile(double gpa, int numberOfUnits, int yearEnrolled,
+            int expectedGraduationYear, int age, int id, long profilePicturId,
+            String name, String gender, String bio, String email,
+            String declaredMajor, ArrayList<String> schedule,
+            ArrayList<String> currentEnrolledClasses,
+            ArrayList<String> completedClasses, ArrayList<String> awards) {
+        this.gpa = gpa;
+        this.numberOfUnits = numberOfUnits;
+        this.yearEnrolled = yearEnrolled;
+        this.expectedGraduationYear = expectedGraduationYear;
+        this.age = age;
+        this.id = id;
+        this.profilePicturId = profilePicturId;
+        this.name = name;
+        this.gender = gender;
+        this.bio = bio;
+        this.email = email;
+        this.declaredMajor = declaredMajor;
+        this.schedule = schedule;
+        this.currentEnrolledClasses = currentEnrolledClasses;
+        this.completedClasses = completedClasses;
+        this.awards = awards;
+    }
 
-	}
+    public double getGpa() {
+        return gpa;
+    }
 
-	public Profile(double gpa, int numberOfUnits, int yearEnrolled, 
-					int expectedGraduationYear, int age, 
-					int id, String gender, Graph schedule, 
-					List currentEnrolledClasses, List completedClasses,
-					List awards, Long profilePicturId,
-					String bio,String email){
-		this.gpa = gpa;
-		this.numberOfUnits = numberOfUnits;
-		this.yearEnrolled = yearEnrolled;
-		this.expectedGraduationYear = expectedGraduationYear;
-		this.age = age;
-		this.id = id;
-		this.gender = gender;
-		this.schedule = schedule;
-		this.currentEnrolledClasses = currentEnrolledClasses;
-		this.completedClasses = completedClasses;
-		this.awards = awards;
-		this.profilePicturId = profilePicturId;
-		this.bio = bio;
-		this.email = email;
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
 
+    public int getNumberOfUnits() {
+        return numberOfUnits;
+    }
 
-	}
+    public void setNumberOfUnits(int numberOfUnits) {
+        this.numberOfUnits = numberOfUnits;
+    }
 
-	public double getGpa(){
-		return gpa;
-	}
+    public int getYearEnrolled() {
+        return yearEnrolled;
+    }
 
-	public void setGpa(double gpa){
-		this.gpa = gpa;
-	}
+    public void setYearEnrolled(int yearEnrolled) {
+        this.yearEnrolled = yearEnrolled;
+    }
 
-	public int getNumberOfUnits(){
-		return numberOfUnits;
-	}
+    public int getExpectedGraduationYear() {
+        return expectedGraduationYear;
+    }
 
-	public void setNumberOfUnits(int numberOfUnits){
-		this.numberOfUnits = numberOfUnits;
-	}
+    public void setExpectedGraduationYear(int expectedGraduationYear) {
+        this.expectedGraduationYear = expectedGraduationYear;
+    }
 
-	public int getYearEnrolled(){
-		return yearEnrolled;
-	}
+    public int getAge() {
+        return age;
+    }
 
-	public void setYearEnrolled(int yearEnrolled){
-		this.yearEnrolled = yearEnrolled;
-	}
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-	public int getExpectedGraduationYear(){
-		return expectedGraduationYear;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setExpectedGraduationYear(int expectedGraduationYear){
-		this.expectedGraduationYear = expectedGraduationYear;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public int getAge(){
-		return age;
-	}
+    public long getProfilePicturId() {
+        return profilePicturId;
+    }
 
-	public void setAge(int age){
-		this.age = age;
-	}
+    public void setProfilePicturId(long profilePicturId) {
+        this.profilePicturId = profilePicturId;
+    }
 
-	public int getId(){
-		return id;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setId(int id){
-		this.id = id;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getGender(){
-		return gender;
-	}
+    public String getGender() {
+        return gender;
+    }
 
-	public void setGender(String gender){
-		this.gender = gender;
-	}
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public Graph getSchedule(){
-		return schedule;
-	}
+    public String getBio() {
+        return bio;
+    }
 
-	public void setSchedule(Graph schedule){
-		this.schedule = schedule;
-	}
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
-	public List getCurrentEnrolledClasses(){
-		return currentEnrolledClasses;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setCurrentEnrolledClasses(List currentEnrolledClasses){
-		this.currentEnrolledClasses = currentEnrolledClasses;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public List getCompletedClasses(){
-		return completedClasses;
-	}
+    public String getDeclaredMajor() {
+        return declaredMajor;
+    }
 
-	public void setCompletedClasses(List completedClasses){
-		this.completedClasses = completedClasses;
-	}
+    public void setDeclaredMajor(String declaredMajor) {
+        this.declaredMajor = declaredMajor;
+    }
 
-	public List getAwards(){
-		return awards;
-	}
+    public ArrayList<String> getSchedule() {
+        return schedule;
+    }
 
-	public void setAwards(List awards){
-		this.awards = awards;
-	}
+    public void setSchedule(ArrayList<String> schedule) {
+        this.schedule = schedule;
+    }
 
-	public Long getProfilePicturId(){
-		return profilePicturId;
-	}
+    public ArrayList<String> getCurrentEnrolledClasses() {
+        return currentEnrolledClasses;
+    }
 
-	public void setProfilePicturId(Long profilePicturId){
-		this.profilePicturId = profilePicturId;
-	}
+    public void setCurrentEnrolledClasses(ArrayList<String> currentEnrolledClasses) {
+        this.currentEnrolledClasses = currentEnrolledClasses;
+    }
 
-	public String getBio(){
-		return bio;
-	}
+    public ArrayList<String> getCompletedClasses() {
+        return completedClasses;
+    }
 
-	public void setBio(String bio){
-		this.bio = bio;
-	}
+    public void setCompletedClasses(ArrayList<String> completedClasses) {
+        this.completedClasses = completedClasses;
+    }
 
-	public String getEmail(){
-		return email;
-	}
+    public ArrayList<String> getAwards() {
+        return awards;
+    }
 
-	public void setEmail(String email){
-		this.email = email;
-	}
+    public void setAwards(ArrayList<String> awards) {
+        this.awards = awards;
+    }
+    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
