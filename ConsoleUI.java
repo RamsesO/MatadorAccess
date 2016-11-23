@@ -71,14 +71,18 @@ public class ConsoleUI {
                     
                     //Input
                     System.out.print("Enter a number: ");
+                    while (!input.hasNextInt()) {
+                        System.out.print("Please enter a number: ");
+                        input.next();
+                    }
                     option = input.nextInt();
                     
                     switch (option) {
                         case 1:
-                            viewCourseStatistics();
+                            courses.viewCourseStatistics();
                             break;
                         case 2:
-                            viewMajorInformation();
+                            majors.viewMajorInformation();
                             break;
                         case 3:
                             credential = login();
@@ -106,20 +110,24 @@ public class ConsoleUI {
                     
                     //Input
                     System.out.print("Enter a number: ");
+                    while (!input.hasNextInt()) {
+                        System.out.print("Please enter a number: ");
+                        input.next();
+                    }
                     option = input.nextInt();
                     
                     switch (option) {
                         case 1:
-                            viewCourseStatistics();
+                            courses.viewCourseStatistics();
                             break;
                         case 2:
-                            viewMajorInformation();
+                            majors.viewMajorInformation();
                             break;
                         case 3:
-                            viewProfile();
+                            profiles.viewProfile();
                             break;
                         case 4:
-                            manageProfile();
+                            profiles.manageProfile();
                             break;
                         case 5:
                             System.out.println("You have logged out.");
@@ -149,23 +157,27 @@ public class ConsoleUI {
                     
                     //Input
                     System.out.print("Enter a number: ");
+                    while (!input.hasNextInt()) {
+                        System.out.print("Please enter a number: ");
+                        input.next();
+                    }
                     option = input.nextInt();
                     
                     switch (option) {
                         case 1:
-                            viewCourseStatistics();
+                            courses.viewCourseStatistics();
                             break;
                         case 2:
-                            viewMajorInformation();
+                            majors.viewMajorInformation();
                             break;
                         case 3:
-                            viewProfile();
+                            profiles.viewProfile();
                             break;
                         case 4:
-                            manageCourse();
+                            courses.manageCourse();
                             break;
                         case 5:
-                            manageMajor();
+                            majors.manageMajor();
                             break;
                         case 6:
                             System.out.println("You have logged out.");
@@ -219,30 +231,6 @@ public class ConsoleUI {
             System.out.println("ERROR: Unable to write database file\n");
             e.printStackTrace();
         }    
-    }
-
-    private static void viewCourseStatistics() {
-        System.out.println("View Course Statistics is not implemented yet");
-    }
-
-    private static void viewMajorInformation() {
-        System.out.println("View Major Information is not implemented yet");
-    }
-    
-    private static void viewProfile() {
-        System.out.println("View Profile is not implemented yet");
-    }
-
-    private static void manageProfile() {
-        System.out.println("Manage Profile is not implemented yet");
-    }
-    
-    private static void manageCourse() {
-        System.out.println("Manage Course is not implemented yet");
-    }
-
-    private static void manageMajor() {
-        System.out.println("Manage Major is not implemented yet");
     }
 
     private static int login() {

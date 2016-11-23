@@ -39,5 +39,13 @@ class MajorDB implements Serializable{
     public Hashtable<Integer, Major> export() {
         return majors;
     }
+	
+    public void viewMajorInformation() {
+        System.out.println("View Major Information is not implemented yet");
+    }
+    
+    public void manageMajor() {
+        System.out.println("Manage Major is not implemented yet");
+    }	
     
 }
