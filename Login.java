@@ -1,7 +1,7 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 
-public class login {
-
+public class Login {
+    /*
   public void authenticate() {
     
     String username, password, inputUsername, inputPassword;
@@ -33,5 +33,5 @@ public class login {
     
   }
   
-
+*/
 }
