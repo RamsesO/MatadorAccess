@@ -1,8 +1,11 @@
 //Created by: Lemuel Dizon
 
 import java.util.*;
+import java.io.Serializable;
 
-public class Course {
+public class Course implements Serializable{
+
+    private static final long serialVersionUID = -4946932189849817646L;
     
     //Main Stuff
     private String name;
@@ -11,7 +14,7 @@ public class Course {
     private int units;
     private int priority;
     private ArrayList<String> prerequisites;
-    private ArrayList<String> corequistes;
+    private ArrayList<String> corequisites;
     
     //Statistical Stuff
     private int avgCourseSize; 
@@ -35,8 +38,8 @@ public class Course {
         this.courseNum = 0;
         this.units = 0;
         this.priority = 0;
-        this.prerequisites = null;
-        this.corequistes = null;
+        this.prerequisites = new ArrayList<String>();
+        this.corequisites = new ArrayList<String>();
         
         //Statistical Stuff
         this.avgCourseSize = 0;
@@ -48,9 +51,9 @@ public class Course {
         this.genRatioF = 0.0;
         this.genRatioM = 0.0;
         this.avgGPA = 0.0;
-        this.instructors = null;
-        this.concepts = null;
-        this.books = null;
+        this.instructors = new ArrayList<String>();
+        this.concepts = new ArrayList<String>();
+        this.books = new ArrayList<String>();
     }
     
     //Constructor with Important stuff as input
@@ -63,7 +66,7 @@ public class Course {
         this.units = units;
         this.priority = priority;
         this.prerequisites = prerequisites;
-        this.corequistes = corequistes;
+        this.corequisites = corequistes;
         
         //Statistical Stuff
         this.avgCourseSize = 0;
@@ -94,7 +97,7 @@ public class Course {
         this.units = units;
         this.priority = priority;
         this.prerequisites = prerequisites;
-        this.corequistes = corequistes;
+        this.corequisites = corequistes;
         
         //Statistical Stuff
         this.avgCourseSize = avgCourseSize;
@@ -132,8 +135,8 @@ public class Course {
         return courseNum;
     }
 
-    public void setCourseNum(int couseNum) {
-        this.courseNum = couseNum;
+    public void setCourseNum(int courseNum) {
+        this.courseNum = courseNum;
     }
 
     public int getUnits() {
@@ -160,12 +163,12 @@ public class Course {
         this.prerequisites = prerequisites;
     }
 
-    public ArrayList<String> getCorequistes() {
-        return corequistes;
+    public ArrayList<String> getCorequisites() {
+        return corequisites;
     }
 
-    public void setCorequistes(ArrayList<String> corequistes) {
-        this.corequistes = corequistes;
+    public void setCorequisites(ArrayList<String> corequistes) {
+        this.corequisites = corequistes;
     }
 
     public int getAvgCourseSize() {
@@ -269,11 +272,11 @@ public class Course {
             int priority, ArrayList<String> prerequisites, ArrayList<String> corequistes) {
         this.name = name;
         this.department = department;
-        this.courseNum = this.courseNum;
+        this.courseNum = courseNum;
         this.units = units;
         this.priority = priority;
         this.prerequisites = prerequisites;
-        this.corequistes = corequistes;
+        this.corequisites = corequistes;
     }
     
     public void setAllStuff(String name, String department, int courseNum, int units,
@@ -288,7 +291,7 @@ public class Course {
         this.units = units;
         this.priority = priority;
         this.prerequisites = prerequisites;
-        this.corequistes = corequistes;
+        this.corequisites = corequistes;
         
         //Statistical Stuff
         this.avgCourseSize = avgCourseSize;
@@ -310,16 +313,16 @@ public class Course {
     public String toString() {
         String str = "Course: " + name + "(" + courseNum + "), " + department + "Units: " + units + "\n" + 
                 "Prerequisites: " + nullCheck(prerequisites) + "\n" +
-                "Corequistes: " + nullCheck(corequistes) + "\n \n" +
+                "Corequistes: " + nullCheck(corequisites) + "\n \n" +
                 "General Statistics: \n" +
                 "Average Couse Size: " + avgCourseSize + "\n" +
                 "Average Sections Available per Semester: " + avgSections + "\n" +
                 "Average Number of Students in Waitlist: " + avgNumSWL + "\n" +
-                "Average Pass Rate: " + (avgPassRate * 100) + "% \n" +
-                "Average Grade (in percentage): " + (avgGrade * 100) + "% \n" +
-                "Difficulty Rating: " + (diffRating * 100) + "% \n" +
-                "Percentage of Females: " + (genRatioF * 100) + "% \n" +
-                "Percentage of Males: " + (genRatioM * 100) + "% \n" +
+                "Average Pass Rate: " + avgPassRate + "\n" +
+                "Average Grade (in percentage): " + avgGrade + "\n" +
+                "Difficulty Rating: " + diffRating + "\n" +
+                "Percentage of Females: " + genRatioF + "\n" +
+                "Percentage of Males: " + genRatioM + "\n" +
                 "Average GPA of Students who take this course: " + avgGPA + "\n" +
                 "Instructors who teach this course: " + nullCheck(instructors) + "\n" +
                 "Concepts covered: " + nullCheck(concepts) + "\n" +
@@ -327,7 +330,7 @@ public class Course {
         return str;
     }
     
-    private static String nullCheck(ArrayList l) {
+    private static String nullCheck(ArrayList<String> l) {
         if(l == null) {
             return "null";
         }
@@ -335,5 +338,4 @@ public class Course {
             return l.toString();
         }
     }
-
 }

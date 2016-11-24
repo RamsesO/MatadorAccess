@@ -1,39 +1,46 @@
 //Lemuel Dizon
 
 import java.util.Scanner;
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class ConsoleUI {
+    
+    //initialize databases 
+    static CourseDB courses = null;
+    //MajorDB majors = null;
+    //ProfileDB profiles = null;
+    static Scanner input = new Scanner(System.in);
    
     public static void main(String[] args) {
         
-        //initialize databases 
-        CourseDB courses = null;
-        MajorDB majors = null;
-        ProfileDB profiles = null;
-        
-        /*
+        //read all database files and import persistent data
         try (
             FileInputStream readcourses = new FileInputStream("cdb.dat");
-            FileInputStream readmajors = new FileInputStream("mdb.dat");
-            FileInputStream readprofiles = new FileInputStream("pdb.dat")
+            //FileInputStream readmajors = new FileInputStream("mdb.dat");
+            //FileInputStream readprofiles = new FileInputStream("pdb.dat")
             )
         {
             ObjectInputStream importcourses = new ObjectInputStream(readcourses);
             courses = (CourseDB)importcourses.readObject();
             readcourses.close();
             
-            ObjectInputStream importmajors = new ObjectInputStream(readmajors);
-            majors = (MajorDB)importmajors.readObject();
-            readmajors.close();
+            //ObjectInputStream importmajors = new ObjectInputStream(readmajors);
+            //majors = (MajorDB)importmajors.readObject();
+            //readmajors.close();
             
-            ObjectInputStream importprofiles = new ObjectInputStream(readprofiles);
-            profiles = (ProfileDB)importprofiles.readObject();
-            readprofiles.close(); 
+            //ObjectInputStream importprofiles = new ObjectInputStream(readprofiles);
+            //profiles = (ProfileDB)importprofiles.readObject();
+            //readprofiles.close(); 
         }
         catch (FileNotFoundException e) {
-            System.out.println("ERROR: Database file not found.\n");
-            e.printStackTrace();
+            System.out.println("ERROR: Database file not found...\n");
+            courses = new CourseDB();
+            System.out.println("Succesfully created new course database.");
         }
         catch (IOException e) {
             System.out.println("ERROR: Unable to read database file.\n");
@@ -43,13 +50,9 @@ public class ConsoleUI {
             System.out.println("ERROR: Invalid database type.\n");
             e.printStackTrace();
         }
-        */
-        
-        courses = new CourseDB();
-        courses.importData("sample.csv");
             
-        Scanner input = new Scanner(System.in);
-        int credential = 0;
+            
+        int credential = 2;
         int option = 0;
         boolean exit = false;
         
@@ -69,18 +72,14 @@ public class ConsoleUI {
                     
                     //Input
                     System.out.print("Enter a number: ");
-                    while (!input.hasNextInt()) {
-                        System.out.print("Please enter a number: ");
-                        input.next();
-                    }
                     option = input.nextInt();
                     
                     switch (option) {
                         case 1:
-                            courses.viewCourseStatistics();
+                            viewCourseStatistics();
                             break;
                         case 2:
-                            majors.viewMajorInformation();
+                            viewMajorInformation();
                             break;
                         case 3:
                             credential = login();
@@ -108,24 +107,20 @@ public class ConsoleUI {
                     
                     //Input
                     System.out.print("Enter a number: ");
-                    while (!input.hasNextInt()) {
-                        System.out.print("Please enter a number: ");
-                        input.next();
-                    }
                     option = input.nextInt();
                     
                     switch (option) {
                         case 1:
-                            courses.viewCourseStatistics();
+                            viewCourseStatistics();
                             break;
                         case 2:
-                            majors.viewMajorInformation();
+                            viewMajorInformation();
                             break;
                         case 3:
-                            profiles.viewProfile();
+                            viewProfile();
                             break;
                         case 4:
-                            profiles.manageProfile();
+                            manageProfile();
                             break;
                         case 5:
                             System.out.println("You have logged out.");
@@ -155,27 +150,23 @@ public class ConsoleUI {
                     
                     //Input
                     System.out.print("Enter a number: ");
-                    while (!input.hasNextInt()) {
-                        System.out.print("Please enter a number: ");
-                        input.next();
-                    }
                     option = input.nextInt();
                     
                     switch (option) {
                         case 1:
-                            courses.viewCourseStatistics();
+                            viewCourseStatistics();
                             break;
                         case 2:
-                            majors.viewMajorInformation();
+                            viewMajorInformation();
                             break;
                         case 3:
-                            profiles.viewProfile();
+                            viewProfile();
                             break;
                         case 4:
-                            courses.manageCourse();
+                            manageCourse();
                             break;
                         case 5:
-                            majors.manageMajor();
+                            manageMajor();
                             break;
                         case 6:
                             System.out.println("You have logged out.");
@@ -202,24 +193,24 @@ public class ConsoleUI {
         
         input.close();
         
-        /*
+        //write all changes to persistent data and save databases to files
         try (
             FileOutputStream writecourses = new FileOutputStream("cdb.dat");
-            FileOutputStream writemajors = new FileOutputStream("mdb.dat");
-            FileOutputStream writeprofiles = new FileOutputStream("pdb.dat");
+            //FileOutputStream writemajors = new FileOutputStream("mdb.dat");
+            //FileOutputStream writeprofiles = new FileOutputStream("pdb.dat");
             )
         {
             ObjectOutputStream exportcourses = new ObjectOutputStream(writecourses);
             exportcourses.writeObject(courses);
             exportcourses.close();
             
-            ObjectOutputStream exportmajors = new ObjectOutputStream(writemajors);
-            exportmajors.writeObject(majors);
-            exportmajors.close();
+            //ObjectOutputStream exportmajors = new ObjectOutputStream(writemajors);
+            //exportmajors.writeObject(majors);
+            //exportmajors.close();
             
-            ObjectOutputStream exportprofiles = new ObjectOutputStream(writeprofiles);
-            exportprofiles.writeObject(profiles);
-            exportprofiles.close();
+            //ObjectOutputStream exportprofiles = new ObjectOutputStream(writeprofiles);
+            //exportprofiles.writeObject(profiles);
+            //exportprofiles.close();
         }
         catch (FileNotFoundException e) {
             System.out.println("ERROR: Unable to write database file\n");
@@ -228,8 +219,62 @@ public class ConsoleUI {
         catch (IOException e) {
             System.out.println("ERROR: Unable to write database file\n");
             e.printStackTrace();
+        }    
+    }
+
+    private static void viewCourseStatistics() {
+        System.out.println("View Course Statistics is not implemented yet");
+    }
+
+    private static void viewMajorInformation() {
+        System.out.println("View Major Information is not implemented yet");
+    }
+    
+    private static void viewProfile() {
+        System.out.println("View Profile is not implemented yet");
+    }
+
+    private static void manageProfile() {
+        System.out.println("Manage Profile is not implemented yet");
+    }
+    
+    private static void manageCourse() {
+        int choice = -1;
+        while(choice != 4) {
+            System.out.println("\n- Course Management");
+            System.out.println("1) Create Course");
+            System.out.println("2) Modify Course");
+            System.out.println("3) Delete Course");
+            System.out.println("4) Return to previous menu");
+            System.out.print("Please select an action: ");
+            choice = input.nextInt();
+            input.nextLine();
+            switch(choice) {
+            
+            case 1:
+                courses.createCourse();
+                break;
+                
+            case 2:
+                courses.modifyCourse();
+                break;
+                
+            case 3:
+                courses.deleteCourse();
+                break;
+                
+            case 4:
+                break;
+                
+            default:
+                System.out.println("Invalid selection!");
+                break;
+            }
         }
-        */
+    }
+
+    private static void manageMajor() {
+        System.out.println("Manage Major is not implemented yet");
     }
 
     private static int login() {
