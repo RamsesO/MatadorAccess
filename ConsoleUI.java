@@ -244,8 +244,65 @@ public class ConsoleUI {
     }
 
     private static int login() {
-        System.out.println("Login is not implemented yet");
-        return 0;
-    }
+        // Local Variables
+        String cvsSplitBy = ",";
+        BufferedReader br = null;
+
+        // User input
+        System.out.println("Enter you username:");
+        String username = input.nextLine();
+        System.out.println("Enter you password:");
+        String password = input.nextLine();
+
+        // Check username and password
+        try {
+
+            String sCurrentLine;
+
+            // File to read
+            br = new BufferedReader(new FileReader("accounts.csv"));
+
+            while ((sCurrentLine = br.readLine()) != null) {
+
+                String[] loginInfo = sCurrentLine.split(cvsSplitBy);
+
+                if(username.equals(loginInfo[0]) && password.equals(loginInfo[1])) {
+
+                    if(loginInfo[2].equals("1")) {
+                        input.close();
+                        br.close();
+                        return 1;
+                    } else
+                        input.close();
+                        br.close();
+                        return 2;
+                }
+
+            }
+
+            return 0;
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+
+                if (br != null) {
+
+                    br.close();
+                    input.close();
+
+                }
+
+            } catch (IOException ex) {
+
+                ex.printStackTrace();
+
+            }
+        }
+        }
 
 }
