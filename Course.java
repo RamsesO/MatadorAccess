@@ -311,7 +311,7 @@ public class Course implements Serializable{
     //Display function
     @Override
     public String toString() {
-        String str = "Course: " + name + "(" + courseNum + "), " + department + "Units: " + units + "\n" + 
+        String str = "\nCourse: " + name + "(" + courseNum + "), " + department + "Units: " + units + "\n" + 
                 "Prerequisites: " + nullCheck(prerequisites) + "\n" +
                 "Corequistes: " + nullCheck(corequisites) + "\n \n" +
                 "General Statistics: \n" +
