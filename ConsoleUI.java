@@ -243,66 +243,76 @@ public class ConsoleUI {
         */
     }
 
-    private static int login() {
-        // Local Variables
-        String cvsSplitBy = ",";
-        BufferedReader br = null;
+	private static int login() {
+		// Local Variables
+		String cvsSplitBy = ",";
+		BufferedReader br = null;
+		Scanner scan = new Scanner(System.in);
+	    
+		// User input
+		System.out.println("Enter you username:");
+		String username = scan.nextLine();
+		System.out.println("Enter you password:");
+		String password = scan.nextLine();
+		
+		// Check username and password
+		try {
 
-        // User input
-        System.out.println("Enter you username:");
-        String username = input.nextLine();
-        System.out.println("Enter you password:");
-        String password = input.nextLine();
+			String sCurrentLine;
+			
+			// File to read
+			br = new BufferedReader(new FileReader("accounts.csv"));
 
-        // Check username and password
-        try {
+			while ((sCurrentLine = br.readLine()) != null) {
+				
+				String[] loginInfo = sCurrentLine.split(cvsSplitBy);
+				
+				if(username.equals(loginInfo[0]) && password.equals(loginInfo[1])) {
+					
+					if(loginInfo[2].equals("1")) {
+						System.out.println("student");
+						scan.close();
+						br.close();
+						return 1;
+					} else {
+						System.out.println("admin");
+						scan.close();
+						br.close();
+						return 2;
+					}
+						
+				}
+				
+			}
+			
+			System.out.println("failed");
+			scan.close();
+			return 0;
 
-            String sCurrentLine;
-
-            // File to read
-            br = new BufferedReader(new FileReader("accounts.csv"));
-
-            while ((sCurrentLine = br.readLine()) != null) {
-
-                String[] loginInfo = sCurrentLine.split(cvsSplitBy);
-
-                if(username.equals(loginInfo[0]) && password.equals(loginInfo[1])) {
-
-                    if(loginInfo[2].equals("1")) {
-                        input.close();
-                        br.close();
-                        return 1;
-                    } else
-                        input.close();
-                        br.close();
-                        return 2;
-                }
-
-            }
-
-            return 0;
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-
-        } finally {
-
-            try {
-
-                if (br != null) {
-
-                    br.close();
-                    input.close();
-
-                }
-
-            } catch (IOException ex) {
-
-                ex.printStackTrace();
-
-            }
-        }
-        }
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			return 0;
+			
+		} finally {
+			
+			try {
+				
+				if (br != null) {
+					
+					br.close();
+					scan.close();
+					return 0;
+					
+				}
+				
+			} catch (IOException ex) {
+				
+				ex.printStackTrace();
+				return 0;
+				
+			}
+		}
+	}
 
 }
