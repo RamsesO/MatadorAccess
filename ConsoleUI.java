@@ -91,7 +91,7 @@ public class ConsoleUI {
                             majors.viewMajorInformation();
                             break;
                         case 3:
-                            credential = login();
+                            credential = login(input);
                             break;
                         case 4:
                             System.out.println("You have exited MatadorAccess.");
@@ -243,18 +243,16 @@ public class ConsoleUI {
         */
     }
 
-	private static int login() {
-
+	private static int login(Scanner input) {
 		// Local Variables
 		String cvsSplitBy = ",";
 		BufferedReader br = null;
-		Scanner scan = new Scanner(System.in);
 	    
 		// User input
-		System.out.println("Enter you username:");
-		String username = scan.nextLine();
-		System.out.println("Enter you password:");
-		String password = scan.nextLine();
+		System.out.println("\nEnter you username:");
+			String username = input.next();
+		System.out.println("\nEnter you password:");
+			String password = input.next();
 		
 		try {
 			
@@ -270,32 +268,24 @@ public class ConsoleUI {
 				if(username.equals(loginInfo[0]) && password.equals(loginInfo[1])) {
 					
 					if(loginInfo[2].equals("1")) {
-						System.out.println("student");
-						scan.close();
+						System.out.println("\nYou are now logged in as student!\n");
 						br.close();
 						return 1;
 					} else {
-						System.out.println("admin");
-						scan.close();
+						System.out.println("\nYou are now logged in as admin!\n");
 						br.close();
 						return 2;
-					}
-						
+					}		
 				}
-			
+				
 			}
-			
 			return 0;
-			
 		} 
 		
-		catch (IOException e) {
-			
+		catch (IOException e) {			
 			e.printStackTrace();
-			return 0;
-			
-		}	
-		
-	}
-
+			return 0;		
+		}
+	} // END login(Scanner input)
+	
 }
