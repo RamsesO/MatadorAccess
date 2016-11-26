@@ -244,6 +244,7 @@ public class ConsoleUI {
     }
 
 	private static int login() {
+
 		// Local Variables
 		String cvsSplitBy = ",";
 		BufferedReader br = null;
@@ -255,9 +256,8 @@ public class ConsoleUI {
 		System.out.println("Enter you password:");
 		String password = scan.nextLine();
 		
-		// Check username and password
 		try {
-
+			
 			String sCurrentLine;
 			
 			// File to read
@@ -282,37 +282,20 @@ public class ConsoleUI {
 					}
 						
 				}
-				
+			
 			}
 			
-			System.out.println("failed");
-			scan.close();
 			return 0;
-
-		} catch (IOException e) {
+			
+		} 
+		
+		catch (IOException e) {
 			
 			e.printStackTrace();
 			return 0;
 			
-		} finally {
-			
-			try {
-				
-				if (br != null) {
-					
-					br.close();
-					scan.close();
-					return 0;
-					
-				}
-				
-			} catch (IOException ex) {
-				
-				ex.printStackTrace();
-				return 0;
-				
-			}
-		}
+		}	
+		
 	}
 
 }
