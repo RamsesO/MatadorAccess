@@ -62,6 +62,22 @@ class Profile{
         this.completedClasses = completedClasses;
         this.awards = awards;
     }
+    
+      public void displayProfile(){
+        System.out.println("Name: "+name+" age: "+age+" gender: "+gender);
+        System.out.println("ID: "+id);
+        System.out.println("email: "+email);
+        System.out.println("major: "+major);
+        System.out.println("number of units: "+numberOfUnits+" GPA: "+gpa);
+        System.out.println("the year enrolled:"+yearEnrolled);
+        System.out.println("expected graduation year: "+expectedGraduationYear);
+        System.out.println(schedule);
+        System.out.println(currentEnrolledClasses);
+        System.out.println(completedClasses);
+        System.out.println(awards);
+
+
+    }
 
     public double getGpa() {
         return gpa;
