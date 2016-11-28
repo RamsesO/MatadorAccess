@@ -18,6 +18,9 @@ class CourseDB implements Serializable{
     }
 
     public Course search(String name) {
+        if(stringTable.get(name) == null){
+            return null;
+        }
         return courses.get(stringTable.get(name));
     }
 
