@@ -9,9 +9,11 @@ public class ConsoleUI {
 
         //initialize databases
         CourseDB courses = null;
-        MajorDB majors = null;
+        MajorDB majors = new MajorDB();
         ProfileDB profiles = null;
         
+	majors.importData("mememajor.csv");
+	    
         //read all database files and import persistent data
         try (FileInputStream readcourses = new FileInputStream("cdb.dat")) {
             ObjectInputStream importcourses = new ObjectInputStream(readcourses);
