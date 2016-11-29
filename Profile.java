@@ -67,7 +67,7 @@ class Profile{
         System.out.println("Name: "+name+" age: "+age+" gender: "+gender);
         System.out.println("ID: "+id);
         System.out.println("email: "+email);
-        System.out.println("major: "+major);
+        System.out.println("major: "+declaredMajor);
         System.out.println("number of units: "+numberOfUnits+" GPA: "+gpa);
         System.out.println("the year enrolled:"+yearEnrolled);
         System.out.println("expected graduation year: "+expectedGraduationYear);
