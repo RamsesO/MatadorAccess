@@ -178,13 +178,5 @@ public class Major {
     	return str;
     	
     }
-    private static String nullCheck(ArrayList<String> l) {
-        if(l == null) {
-            return "null";
-        }
-        else {
-            return l.toString();
-        }
-    }
 }
 
