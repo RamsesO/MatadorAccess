@@ -47,6 +47,14 @@ class MajorDB implements Serializable{
     	int id = 0;
     	int option = 0;
     	
+        System.out.println("\nCurrently Registered Majors:\n");
+        Enumeration<Major> e = majors.elements();
+        while (e.hasMoreElements()) {
+            Major next = e.nextElement();
+            System.out.println(next.getMajorId() + ": " + next.getMajorName());
+        }
+        System.out.println();
+    	
     	while(temp == null) {
     		System.out.print("Enter a name or number: ");
     		if(!input.hasNextInt()) {
@@ -100,8 +108,31 @@ class MajorDB implements Serializable{
     }
     
     public void manageMajor() {
-        System.out.println("Manage Major is not implemented yet");
+        Scanner input = new Scanner(System.in);
+        int choice = -1;
+        while(choice != 2) {
+            System.out.println("\n- Major Management");
+            System.out.println("1) Import sample CSV file");
+            System.out.println("2) Return to previous menu");
+            System.out.print("Please select an action: ");
+            choice = input.nextInt();
+            input.nextLine();
+            switch(choice) {
+
+                case 1:
+                    this.importData("sampleMajors.csv");
+                    break;
+
+                case 2:
+                    break;
+    
+                default:
+                    System.out.println("Invalid selection!");
+                    break;
+            }
+        }
     }
+    
     public void importData(String filename) {
         try {
             BufferedReader input = new BufferedReader(new FileReader(filename));
@@ -136,8 +167,8 @@ class MajorDB implements Serializable{
                 subset = parsedData[10].split(";");
                 temp.setCourses(new ArrayList<String>(Arrays.asList(subset)));
                 
-                
-                add(temp);
+                this.add(temp);
+                System.out.println("\nSuccessfully imported sampleMajors.csv!");
             }
         } 
         catch (IOException e) {

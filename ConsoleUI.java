@@ -9,48 +9,47 @@ public class ConsoleUI {
 
         //initialize databases
         CourseDB courses = null;
-        MajorDB majors = new MajorDB();
+        MajorDB majors = null;;
         ProfileDB profiles = null;
         
-	majors.importData("mememajor.csv");
-	    
         //read all database files and import persistent data
         try (FileInputStream readcourses = new FileInputStream("cdb.dat")) {
             ObjectInputStream importcourses = new ObjectInputStream(readcourses);
             courses = (CourseDB)importcourses.readObject();
             readcourses.close();
         } catch (FileNotFoundException e) {
-            System.out.println("ERROR: Course database file not found...\n");
+            System.out.println("ERROR: Course database file not found...");
             courses = new CourseDB();
-            System.out.println("Succesfully created new course database.");
+            System.out.println("Succesfully created new course database.\n");
         } catch (IOException e) {
             System.out.println("ERROR: Unable to read course database file.\n");
         } catch (ClassNotFoundException e) {
             System.out.println("ERROR: Invalid course database type.\n");
         }
-        /*
+        
         try (FileInputStream readmajors = new FileInputStream("mdb.dat")) {
             ObjectInputStream importmajors = new ObjectInputStream(readmajors);
             majors = (MajorDB)importmajors.readObject();
             readmajors.close();
         } catch (FileNotFoundException e) {
-            System.out.println("ERROR: Major database file not found...\n");
+            System.out.println("ERROR: Major database file not found...");
             majors = new MajorDB();
-            System.out.println("Succesfully created new major database.");
+            System.out.println("Succesfully created new major database.\n");
         } catch (IOException e) {
             System.out.println("ERROR: Unable to read major database file.\n");
         } catch (ClassNotFoundException e) {
             System.out.println("ERROR: Invalid major database type.\n");
         }
-
+        
+        /*
         try (FileInputStream readprofiles = new FileInputStream("pdb.dat")) {
             ObjectInputStream importprofiles = new ObjectInputStream(readprofiles);
             profiles = (ProfileDB)importprofiles.readObject();
             readprofiles.close();
         } catch (FileNotFoundException e) {
-            System.out.println("ERROR: Profile database file not found...\n");
+            System.out.println("ERROR: Profile database file not found...");
             profiles = new ProfileDB();
-            System.out.println("Succesfully created new profile database.");
+            System.out.println("Succesfully created new profile database.\n");
         } catch (IOException e) {
             System.out.println("ERROR: Unable to read profile database file.\n");
         } catch (ClassNotFoundException e) {
@@ -59,7 +58,7 @@ public class ConsoleUI {
         */
         
         Scanner input = new Scanner(System.in);
-        int credential = 2;
+        int credential = 0;
         int option = 0;
         boolean exit = false;
 
@@ -222,7 +221,7 @@ public class ConsoleUI {
         } catch (IOException e) {
             System.out.println("ERROR: Unable to write course database file\n");
         }
-        /*
+        
         try (FileOutputStream writemajors = new FileOutputStream("mdb.dat")) {
             ObjectOutputStream exportmajors = new ObjectOutputStream(writemajors);
             exportmajors.writeObject(majors);
@@ -232,7 +231,8 @@ public class ConsoleUI {
         } catch (IOException e) {
             System.out.println("ERROR: Unable to write major database file\n");
         }
-
+        
+        /*
         try (FileOutputStream writeprofiles = new FileOutputStream("pdb.dat")) {
             ObjectOutputStream exportprofiles = new ObjectOutputStream(writeprofiles);
             exportprofiles.writeObject(profiles);

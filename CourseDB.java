@@ -71,7 +71,7 @@ class CourseDB implements Serializable{
                 break;
                 
             case 4:
-                importData("sample.csv");
+                importData("sampleCourses.csv");
                 break;
 
             case 5:
@@ -406,6 +406,14 @@ class CourseDB implements Serializable{
         int id = 0;
         int option = 0;
 
+        System.out.println("\nCurrently Registered Courses:\n");
+        Enumeration<Course> e = courses.elements();
+        while (e.hasMoreElements()) {
+            Course next = e.nextElement();
+            System.out.println(next.getCourseNum() + ": " + next.getName());
+        }
+        System.out.println();
+        
         while (temp == null) {
             System.out.print("Enter a name or number: ");
             if (!input.hasNextInt()) {
@@ -505,6 +513,7 @@ class CourseDB implements Serializable{
                 temp.setBooks(new ArrayList<String>(Arrays.asList(subset)));
 
                 add(temp);
+                System.out.println("\nSuccessfully imported sampleCourses.csv!");
             }
         }
         catch (IOException e) {

@@ -1,7 +1,8 @@
 
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
-public class Major {
+public class Major implements Serializable {
 
     // Main variables
     private int majorId;
