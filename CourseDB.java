@@ -1,22 +1,84 @@
+/*----------------------------------------------------------------------------
+Module Name: CourseDB (Course Database Object w/ associated functions)
+Inputs: Course objects, Assorted variable types representing course attributes
+Outputs: Course objects, Hashtables containing Course objects
+Submodules: createCourse(), modifyCourse(), deleteCourse(),
+            viewCourseStatistics(), importData()
+
+Author: Ryan Vitacion
+Date: 11/23/16
+
+Reviewer: Ryan Vitacion
+Date: 12/04/16
+
+- Revision History -
+
+Programmer: Ryan Vitacion
+Date: 12/04/16
+Description of Changes: code formatting/comments
+Reviewer: Ryan Vitacion
+Date of Review: 12/04/16
+
+Programmer: Ryan Vitacion
+Date: 12/04/16
+Description of Changes: Add exception handling to delete/modify course
+Reviewer: Ryan Vitacion
+Date of Review: 12/04/16
+
+Programmer: Ryan Vitacion
+Date: 11/30/16
+Description of Changes: Add list of courses to viewCourseStatistics()
+Reviewer: Ryan Vitacion
+Date of Review: 11/30/16
+
+Programmer: Ramses Ordonez
+Date: 11/27/16
+Description of Changes: Fix course search by name
+Reviewer: Ramses Ordonez
+Date of Review: 11/27/16
+
+Programmer: Ryan Vitacion
+Date: 11/24/16
+Description of Changes: Implement create/modify/delete course
+Reviewer: Ryan Vitacion
+Date of Review: 11/24/16
+
+Programmer: Lemuel Dizon
+Date: 11/23/16
+Description of Changes: Implement viewCourseStatistics() and importData()
+Reviewer: Lemuel Dizon
+Date of Review: 11/23/16
+
+Programmer: Ryan Vitacion
+Date: 11/21/16
+Description of Changes: Add support for serialization
+Reviewer: Ryan Vitacion
+Date of Review: 11/21/16
+----------------------------------------------------------------------------*/
+
 import java.util.*;
 import java.io.*;
 
 class CourseDB implements Serializable{
 
     private static final long serialVersionUID = 1902501367567782416L;
-
+    
+    //hashtables to store courses with both integer and string keys
     private Hashtable<String, Integer> stringTable;
     private Hashtable<Integer, Course> courses;
 
+    //constructor
     public CourseDB() {
         this.stringTable = new Hashtable<String, Integer>();
         this.courses = new Hashtable<Integer, Course>();
     }
 
+    //search by course ID#
     public Course search(Integer id) {
         return courses.get(id);
     }
-
+    
+    //search by course name
     public Course search(String name) {
         if(stringTable.get(name) == null){
             return null;
@@ -24,25 +86,30 @@ class CourseDB implements Serializable{
         return courses.get(stringTable.get(name));
     }
 
+    //add course object to database
     public void add(Course crs) {
         courses.put(crs.getCourseNum(), crs);
         stringTable.put(crs.getName(), crs.getCourseNum());
     }
 
+    //delete course object from database by ID#
     public void delete(Integer id) {
         stringTable.remove(courses.get(id).getCourseNum());
         courses.remove(id);
     }
 
+    //delete course object from database by name
     public void delete(String name) {
         courses.remove(stringTable.get(name));
         stringTable.remove(name);
     }
 
+    //export hashtable containing stored courses
     public Hashtable<Integer, Course> export() {
         return courses;
     }
 
+    //course management menu
     public void manageCourse() {
         Scanner input = new Scanner(System.in);
         int choice = -1;
@@ -84,126 +151,145 @@ class CourseDB implements Serializable{
         }
     }
 
+    //course creation function
     public void createCourse() {
-
-        Scanner input = new Scanner(System.in);
-
-        Course newcrs = new Course();
-
-        System.out.println("\nPlease enter the following parameters of the new course:\n");
-
-        System.out.printf("Name: ");
-        newcrs.setName(input.nextLine());
-
-        System.out.printf("Department: ");
-        newcrs.setDepartment(input.nextLine());
-
-        System.out.printf("Course ID#: ");
-        newcrs.setCourseNum(input.nextInt());
-
-        System.out.printf("# of Units: ");
-        newcrs.setUnits(input.nextInt());
-
-        System.out.printf("Priority: ");
-        newcrs.setPriority(input.nextInt());
-
-        System.out.printf("Average Students/Course: ");
-        newcrs.setAvgCourseSize(input.nextInt());
-
-        System.out.printf("Average # of Sections: ");
-        newcrs.setAvgSections(input.nextInt());
-
-        System.out.printf("Average # of Students in Waitlist: ");
-        newcrs.setAvgNumSWL(input.nextInt());
-
-        System.out.printf("Average Pass Rate: ");
-        newcrs.setAvgPassRate(input.nextDouble());
-
-        System.out.printf("Difficulty Rating: ");
-        newcrs.setDiffRating(input.nextDouble());
-
-        System.out.printf("Male to Female Gender Ratio: ");
-        newcrs.setGenRatioM(input.nextDouble());
-        newcrs.setGenRatioF(1.0-(newcrs.getGenRatioM()));
-
-        System.out.printf("Average GPA: ");
-        newcrs.setAvgGPA(input.nextDouble());
-
-        System.out.println("\n- Please enter the prerequisites for this course:");
-        int next = 1;
-        input.nextLine();
-        while(next == 1) {
-            System.out.printf("\nName of Prerequisite: ");
-            newcrs.getPrerequisites().add(input.nextLine());
-            System.out.printf("Enter another prerequisite? (1=Yes 2=No): ");
-            next = input.nextInt();
-            input.nextLine();
-        }
-
-        next = 1;
-        System.out.println("\n- Please enter the corequisites for this course:");
-        while(next == 1) {
-            System.out.printf("\nName of Corequisite: ");
-            newcrs.getCorequisites().add(input.nextLine());
-            System.out.printf("Enter another corequisite? (1=Yes 2=No): ");
-            next = input.nextInt();
-            input.nextLine();
-        }
-
-        next = 1;
-        System.out.println("\n- Please enter the instructors who teach this course:");
-        while(next == 1) {
-            System.out.printf("\nName of Instructor: ");
-            newcrs.getInstructors().add(input.nextLine());
-            System.out.printf("Enter another instructor? (1=Yes 2=No): ");
-            next = input.nextInt();
-            input.nextLine();
-        }
-
-        next = 1;
-        System.out.println("\n- Please enter the concepts taught in this course:");
-        while(next == 1) {
-            System.out.printf("\nName of Concept: ");
-            newcrs.getConcepts().add(input.nextLine());
-            System.out.printf("Enter another concept? (1=Yes 2=No): ");
-            next = input.nextInt();
-            input.nextLine();
-        }
-
-        next = 1;
-        System.out.println("\n- Please enter the textbooks used in this course:");
-        while(next == 1) {
-            System.out.printf("\nName of Textbook: ");
-            newcrs.getBooks().add(input.nextLine());
-            System.out.printf("Enter another textbook? (1=Yes 2=No): ");
-            next = input.nextInt();
-            input.nextLine();
-        }
-
-        this.add(newcrs);
-        System.out.println("\nNew course succesfully registered!");
-
-    }
-
-    public void modifyCourse() {
 
         try {
             Scanner input = new Scanner(System.in);
+
+            Course newcrs = new Course();
+            
+            //prompt user to enter each attribute of the new course
+            System.out.println("\nPlease enter the following parameters of the new course:\n");
+
+            System.out.printf("Name: ");
+            newcrs.setName(input.nextLine());
+
+            System.out.printf("Department: ");
+            newcrs.setDepartment(input.nextLine());
+
+            System.out.printf("Course ID#: ");
+            newcrs.setCourseNum(input.nextInt());
+
+            System.out.printf("# of Units: ");
+            newcrs.setUnits(input.nextInt());
+
+            System.out.printf("Priority: ");
+            newcrs.setPriority(input.nextInt());
+
+            System.out.printf("Average Students/Course: ");
+            newcrs.setAvgCourseSize(input.nextInt());
+
+            System.out.printf("Average # of Sections: ");
+            newcrs.setAvgSections(input.nextInt());
+
+            System.out.printf("Average # of Students in Waitlist: ");
+            newcrs.setAvgNumSWL(input.nextInt());
+
+            System.out.printf("Average Pass Rate: ");
+            newcrs.setAvgPassRate(input.nextDouble());
+
+            System.out.printf("Difficulty Rating: ");
+            newcrs.setDiffRating(input.nextDouble());
+
+            System.out.printf("Male to Female Gender Ratio: ");
+            newcrs.setGenRatioM(input.nextDouble());
+            newcrs.setGenRatioF(1.0-(newcrs.getGenRatioM()));
+
+            System.out.printf("Average GPA: ");
+            newcrs.setAvgGPA(input.nextDouble());
+
+            //Prompt user for each list attribute of the new course
+            System.out.println("\n- Please enter the prerequisites for this course:");
+            int next = 1;
+            input.nextLine();
+            while(next == 1) {
+                System.out.printf("\nName of Prerequisite: ");
+                newcrs.getPrerequisites().add(input.nextLine());
+                System.out.printf("Enter another prerequisite? (1=Yes 2=No): ");
+                next = input.nextInt();
+                input.nextLine();
+            }
+
+            next = 1;
+            System.out.println("\n- Please enter the corequisites for this course:");
+            while(next == 1) {
+                System.out.printf("\nName of Corequisite: ");
+                newcrs.getCorequisites().add(input.nextLine());
+                System.out.printf("Enter another corequisite? (1=Yes 2=No): ");
+                next = input.nextInt();
+                input.nextLine();
+            }
+
+            next = 1;
+            System.out.println("\n- Please enter the instructors who teach this course:");
+            while(next == 1) {
+                System.out.printf("\nName of Instructor: ");
+                newcrs.getInstructors().add(input.nextLine());
+                System.out.printf("Enter another instructor? (1=Yes 2=No): ");
+                next = input.nextInt();
+                input.nextLine();
+            }
+
+            next = 1;
+            System.out.println("\n- Please enter the concepts taught in this course:");
+            while(next == 1) {
+                System.out.printf("\nName of Concept: ");
+                newcrs.getConcepts().add(input.nextLine());
+                System.out.printf("Enter another concept? (1=Yes 2=No): ");
+                next = input.nextInt();
+                input.nextLine();
+            }
+
+            next = 1;
+            System.out.println("\n- Please enter the textbooks used in this course:");
+            while(next == 1) {
+                System.out.printf("\nName of Textbook: ");
+                newcrs.getBooks().add(input.nextLine());
+                System.out.printf("Enter another textbook? (1=Yes 2=No): ");
+                next = input.nextInt();
+                input.nextLine();
+            }
+
+            //push new course into database and alert user of success
+            this.add(newcrs);
+            System.out.println("\nNew course succesfully registered!");
+        }
+        
+        //handle invalid user input
+        catch (Exception e) {
+            System.out.println("\nInvalid input!  Please try again...");
+        }
+
+    }
+
+    //course modification function
+    public void modifyCourse() {
+
+        try {
+            
+            Scanner input = new Scanner(System.in);
+            
+            //display a list of all existing courses in the database
             System.out.println("\nCurrently Registered Courses:\n");
             Enumeration<Course> e = courses.elements();
             while (e.hasMoreElements()) {
                 Course next = e.nextElement();
                 System.out.println(next.getCourseNum() + ": " + next.getName());
             }
+            
+            //prompt user to enter the target course ID#
             System.out.print("\n- Please enter the ID# of the course you wish to modify: ");
             int target = input.nextInt();
             input.nextLine();
             
+            //return to previous menu if target course does not exist
             if(!courses.containsKey(target)) {
                 System.out.println("\nNo such course with given ID# exists!  Please try again.");
                 return;
             }
-
+            
+            //display menu of modifiable course attributes
             int choice = -1;
             int next;
             while(choice != 0) {
@@ -229,8 +315,11 @@ class CourseDB implements Serializable{
                 
                 choice = input.nextInt();
                 input.nextLine();
+                
+                //for each selection, prompt user to enter new value and apply changes
                 switch(choice) {
 
+                //cases 1-12: single-element attributes
                 case 1:
                     System.out.print("\nName: ");
                     courses.get(target).setName(input.nextLine());
@@ -314,6 +403,7 @@ class CourseDB implements Serializable{
                     System.out.println("\nAttribute has been successfully modified!");
                     break;
 
+                //cases 13-17: list attributes
                 case 13:
                     System.out.println("\nPlease re-enter all prerequisites for this course:");
                     courses.get(target).getPrerequisites().clear();
@@ -385,45 +475,66 @@ class CourseDB implements Serializable{
                     break;
                 }
             }
-        } catch (InputMismatchException e) {
+            
+        }
+        
+        //handle invalid user input
+        catch (InputMismatchException e) {
             System.out.println("\nInvalid input!  Please try again...");
         }
     }
 
     public void deleteCourse() {
+        
         try {
+            
+            //check if database is empty, alert user
             if(courses.isEmpty()) System.out.println("\nNo courses to delete!");
             else {
+                
                 Scanner input = new Scanner(System.in);
+                
+                //display list of existing courses in database
                 System.out.println("\nCurrently Registered Courses:\n");
                 Enumeration<Course> e = courses.elements();
                 while (e.hasMoreElements()) {
                     Course next = e.nextElement();
                     System.out.println(next.getCourseNum() + ": " + next.getName());
                 }
+                
+                //prompt user for target course
                 System.out.print("\n- Please enter the ID# of the course you wish to delete: ");
                 int target = input.nextInt();
                 input.nextLine();
                 
+                //if target course does not exist, alert user and return to previous menu
                 if(!courses.containsKey(target)) {
                     System.out.println("\nNo such course with given ID# exists!  Please try again.");
                     return;
                 }
                 
+                //prompt user to confirm course deletion
                 System.out.printf("\nAre you sure you want to delete course %d? (1=Yes 0=No): ", target);
                 if(input.nextInt() != 1) {
                     System.out.println("\nCourse was not deleted.");
                     return;
                 }
                 input.nextLine();
+                
+                //delete target course and alert user of success
                 this.delete(target);
                 System.out.printf("\nCourse #%d has been successfully deleted.\n", target);
             }
-        } catch (InputMismatchException e) {
+            
+        }
+        
+        //handle invalid user input
+        catch (InputMismatchException e) {
             System.out.println("\nInvalid input! Please try again...");
         }
     }
 
+    //view course statistics function
     public void viewCourseStatistics() {
         Scanner input = new Scanner(System.in);
         Course temp = null;
@@ -431,6 +542,7 @@ class CourseDB implements Serializable{
         int id = 0;
         int option = 0;
 
+        //display list of existing courses in database
         System.out.println("\nCurrently Registered Courses:\n");
         Enumeration<Course> e = courses.elements();
         while (e.hasMoreElements()) {
@@ -440,11 +552,16 @@ class CourseDB implements Serializable{
         System.out.println();
         
         while (temp == null) {
+            
+            //prompt user for target course
             System.out.print("Enter a name or number: ");
+            
+            //search by course ID#
             if (!input.hasNextInt()) {
                 name = input.nextLine();
                 temp = search(name);
 
+                //if target course does not exist, alert user
                 if (temp == null) {
                     System.out.println("Course not found.");
                     System.out.println("1) Search Again");
@@ -456,6 +573,7 @@ class CourseDB implements Serializable{
                     }
                     option = input.nextInt();
 
+                    //handle invalid user input
                     while (option != 1 && option != 2) {
                         System.out.println("Invalid command please enter 1 or 2: ");
                         option = input.nextInt();
@@ -463,10 +581,13 @@ class CourseDB implements Serializable{
                     if(option == 2) break;
                 }
             }
+            
+            //search by course name
             else {
                 id = input.nextInt();
                 temp = search(id);
 
+                //if target course does not exist, alert user
                 if (temp == null) {
                     System.out.println("Course not found.");
                     System.out.println("1) Search Again");
@@ -478,6 +599,7 @@ class CourseDB implements Serializable{
                     }
                     option = input.nextInt();
 
+                    //handle invalid user input
                     while (option != 1 && option != 2) {
                         System.out.println("Invalid command please enter 1 or 2: ");
                         option = input.nextInt();
@@ -486,11 +608,14 @@ class CourseDB implements Serializable{
                 }
             }
         }
+        
+        //once target course is found, display relevant info
         if (temp != null) {
             System.out.println(temp.toString());
         }
     }
 
+    //.csv file import function
     public void importData(String filename) {
         try {
             BufferedReader input = new BufferedReader(new FileReader(filename));
@@ -503,6 +628,7 @@ class CourseDB implements Serializable{
             input.readLine();
             line = null;
 
+            //read each line of .csv file and enter contents into new course
             while((line = input.readLine()) != null) {
                 parsedData = line.split(",");
                 temp = new Course();
@@ -537,10 +663,13 @@ class CourseDB implements Serializable{
                 subset = parsedData[18].split(";");
                 temp.setBooks(new ArrayList<String>(Arrays.asList(subset)));
 
+                //add new course to database
                 add(temp);
-                System.out.println("\nSuccessfully imported sampleCourses.csv!");
             }
+            //alert user of successful file import
+            System.out.println("\nSuccessfully imported sampleCourses.csv!");
         }
+        //handle nonexistent file/IO error
         catch (IOException e) {
             System.out.println("Error: File Not Found");
         }
