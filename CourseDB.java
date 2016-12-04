@@ -13,6 +13,12 @@ Date: 12/04/16
 
 - Revision History -
 
+Programmer: Hamoun Mojib 
+Date: 12/04/16
+Description of Changes: code formatting/comments
+Reviewer: Hamoun Mojib
+Date of Review: 12/04/16
+
 Programmer: Ryan Vitacion
 Date: 12/04/16
 Description of Changes: code formatting/comments
@@ -25,11 +31,23 @@ Description of Changes: Add exception handling to delete/modify course
 Reviewer: Ryan Vitacion
 Date of Review: 12/04/16
 
+Programmer: Hamoun Mojib 
+Date: 12/03/16
+Description of Changes: Fix bugs in Course Scheduling 
+Reviewer: Hamoun Mojib
+Date of Review: 12/03/16
+
 Programmer: Ryan Vitacion
 Date: 11/30/16
 Description of Changes: Add list of courses to viewCourseStatistics()
 Reviewer: Ryan Vitacion
 Date of Review: 11/30/16
+
+Programmer: Hamoun Mojib 
+Date: 11/27/16
+Description of Changes: Add Course Scheduling 
+Reviewer: Hamoun Mojib
+Date of Review: 11/27/16
 
 Programmer: Ramses Ordonez
 Date: 11/27/16
@@ -57,6 +75,7 @@ Date of Review: 11/21/16
 ----------------------------------------------------------------------------*/
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.io.*;
 
 class CourseDB implements Serializable{
@@ -66,6 +85,368 @@ class CourseDB implements Serializable{
     //hashtables to store courses with both integer and string keys
     private Hashtable<String, Integer> stringTable;
     private Hashtable<Integer, Course> courses;
+	
+	/// This method is the entry point for course scheduling. 
+	public void createSchedule() {
+		
+		ArrayList<Integer> majorCourses = new ArrayList<Integer>();
+
+		ArrayList<Integer> completedClassesInteger = new ArrayList<Integer>();
+
+		Hashtable<Integer, Course> updatedCourses = new Hashtable<Integer, Course>();
+
+		ArrayList<Course> toCompleteClasses = new ArrayList<Course>();
+
+		completedClassesInteger = getCompletedClasses();
+
+		Scanner input = new Scanner(System.in);
+
+		System.out.println("Please enter the major you wish to study.");
+
+		String major = input.nextLine();
+
+		majorCourses = getMajorRequirements(major + ".csv");
+
+		majorCourses.removeAll(completedClassesInteger);
+		
+		ArrayList<Course> completedClassesCourse = updateCoursesWithPreviouslyTakenClasses(completedClassesInteger); 
+
+		updatedCourses = getUpdatedCourses(majorCourses);
+		
+		updatedCourses = updateCoursesWithTakenClasses(updatedCourses, completedClassesCourse); 
+
+		Scanner secondInput = new Scanner(System.in);
+
+		System.out.println("Please enter the number of semesters you would like to plan. ");
+
+		int numberOfSemesters = secondInput.nextInt();
+
+		Scanner thirdInput = new Scanner(System.in);
+
+		System.out.println("Please enter the number of hours working. ");
+
+		int numberOfHours = thirdInput.nextInt();
+
+		Scanner fourthInput = new Scanner(System.in);
+
+		System.out.println("Please enter difficulty weight. ");
+
+		int weight = fourthInput.nextInt();
+
+		for (int i = 0; i < numberOfSemesters; i++) {
+			toCompleteClasses = getSemesterSchedule(updatedCourses, weight);
+
+			updatedCourses = updateCoursesWithTakenClasses(updatedCourses, toCompleteClasses);
+			
+			updatedCourses = updatedHashTable(updatedCourses, toCompleteClasses); 
+
+			int totalUnits = 0;
+
+			System.out.println("----------Semester " + (i + 1) + "----------");
+
+			for (Course tempCourse : toCompleteClasses) {
+
+				System.out.println(tempCourse.getName() + " : " + tempCourse.getUnits());
+
+				totalUnits += tempCourse.getUnits();
+			}
+
+			System.out.println("Total Units:" + totalUnits);
+		}
+
+	}
+	
+	// Summary: 	This method updates the hashtable that contains classes that need to be taken with the classes that have already been taken
+	// Input: 		Hashtable containing all the classes that need to be scheduled. 
+	//		  		List of classes already taken.
+	// Output: 		Hashtable taken from input with classes taken removed. 
+	public Hashtable<Integer, Course> updatedHashTable(Hashtable<Integer, Course> updatedCourses, ArrayList<Course> toCompleteClasses){
+				
+		Iterator<Integer> updatedCoursesIter = updatedCourses.keySet().iterator(); 
+		while(updatedCoursesIter.hasNext()){
+			Course toDelete = updatedCourses.get(updatedCoursesIter.next());  			
+			
+			Iterator<Course> toCompleteClassesIter = toCompleteClasses.iterator(); 
+			while(toCompleteClassesIter.hasNext()){
+				Course classTaken = toCompleteClassesIter.next(); 
+				
+				if(classTaken.getName().toLowerCase().equals(toDelete.getName().toLowerCase())){
+					
+					updatedCoursesIter.remove();
+					
+					break; 
+				}
+				
+			}
+		}		
+		
+		return updatedCourses; 
+	}
+	
+	// Summary: 	Creates  a List of courses from a list of course numbers
+	// Input: 		List of course numbers of classes already taken		  		
+	// Output: 		List of courses
+	public ArrayList<Course> updateCoursesWithPreviouslyTakenClasses(ArrayList<Integer> completedClasses){
+		
+		ArrayList<Course> prevCompletedClasses = new ArrayList<Course>(); 
+		
+		Enumeration<Course> e = courses.elements();
+		while (e.hasMoreElements()) {
+			Course next = e.nextElement();
+		
+			Iterator<Integer> completedClassesIter = completedClasses.iterator(); 
+			while(completedClassesIter.hasNext()){
+				Integer currentCourseNumber = completedClassesIter.next(); 
+				
+				if (next.getCourseNum() == currentCourseNumber){
+					prevCompletedClasses.add(next);  
+				}
+			}
+			
+		}
+		
+		return prevCompletedClasses;
+	}
+	
+
+	// Summary: 	Updates prerequisites in  hashtable of courses that need to be taken with courses that have already been taken/scheduled	
+	// Input: 		Hashtable of courses that have to be taken
+	// Output: 		ArrayList of classes that have been taken, scheduled
+	public Hashtable<Integer, Course> updateCoursesWithTakenClasses(Hashtable<Integer, Course> updatedCourses,
+			ArrayList<Course> toCompleteClasses) {
+		
+		for(Entry<Integer, Course> entry : updatedCourses.entrySet()){
+			Course currentCourse = entry.getValue(); 
+			Course toUpdateHashTable = currentCourse; 
+			ArrayList<String> toUpdateCourse = new ArrayList<>();
+
+			
+			Iterator<String> currentCourseIter = currentCourse.getPrerequisites().iterator(); 
+			while(currentCourseIter.hasNext()){
+				String prereq = currentCourseIter.next(); 
+				boolean foundPrereq = false; 
+				
+				if (prereq.toLowerCase().equals("0".toLowerCase())){
+					continue; 
+				}
+				else{
+				
+					Iterator<Course> toCompleteClassesIter= toCompleteClasses.iterator(); 
+					while(toCompleteClassesIter.hasNext()){
+						Course classTaken = toCompleteClassesIter.next(); 
+
+						if(prereq.toLowerCase().contains(classTaken.getName().toLowerCase())){
+							toUpdateCourse.add("0"); 
+							foundPrereq = true; 
+						}	
+					}
+					
+					if(!foundPrereq){
+						toUpdateCourse.add(prereq); 
+					}
+					
+				}
+			}
+			
+			if(!toUpdateCourse.isEmpty()){
+			
+				toUpdateHashTable.setPrerequisites(toUpdateCourse); 
+				
+				updatedCourses.replace(entry.getKey(), toUpdateHashTable); 
+			}
+			
+		}		
+		
+		return updatedCourses; 
+	}
+	
+	// Summary:		Sorts a hashtable of courses by a course priority and adds to a List 	
+	// Input: 		Hashtable of courses
+	// Output:		List of sorted courses
+	public ArrayList<Course> sortHashTable(Hashtable<Integer, Course> updatedCourses){
+		ArrayList<Course> sortedArrayList = new ArrayList<>(); 		
+		
+		for(int index = 0; index < 5; index++){
+		
+			for(Entry<Integer, Course> entry : updatedCourses.entrySet()){
+				Course currentCourse = entry.getValue(); 			
+				
+				if(currentCourse.getPriority() == index){
+					sortedArrayList.add(currentCourse); 
+				}
+			}
+		
+		}		
+		
+		return sortedArrayList; 
+	}
+	
+	// Summary: 	Checks if a course has any prerequisites
+	// Input: 		Course	
+	// Output:		boolean [True|False]
+	public static boolean hasPrerequisites(Course currentCourse){
+		boolean hasPrereq; 
+		
+		int prereqNum = currentCourse.getPrerequisites().size(); 
+		
+		Iterator<String> currentCoursePrereqIter = currentCourse.getPrerequisites().iterator(); 
+		while(currentCoursePrereqIter.hasNext()){
+			String prereq = currentCoursePrereqIter.next(); 
+			
+			if(prereq.toLowerCase().equals("0".toLowerCase())){
+				prereqNum--; 
+			}
+		}
+		
+		if(prereqNum == 0)
+		{
+			hasPrereq = false; 
+		}
+		else{
+			hasPrereq = true; 
+		}
+		
+		return hasPrereq; 
+	}
+	// Summary: 	Gets the Location of a corequisite in a hashtable of courses
+	// Input: 		Hashtbable of courses
+	//				String: Course Name
+	// Output:		Integer: Key in the hashtable from input	
+	public static int getCorequisiteLocation(Hashtable<Integer, Course> updatedCourses, String courseName){
+		int key = -1; 
+		
+		Enumeration<Course> e = updatedCourses.elements();
+		while (e.hasMoreElements()) {
+			Course next = e.nextElement();
+		
+			if (next.getName().toLowerCase().equals(courseName)){
+				key = next.getCourseNum(); 
+			}
+		}
+		
+		return key;
+	}
+	
+	//Summary: 		Gets a List of classes to take in a semester
+	//Input: 		Hashtable of courses to choose from
+	//				Integer of how many units to take this semester. 
+	//Output:		List of classes to take this semester
+	public ArrayList<Course> getSemesterSchedule(Hashtable<Integer, Course> updatedCourses, int weight) {
+		ArrayList<Course> toCompleteClasses = new ArrayList<>();
+		ArrayList<Course> sortedArrayList = sortHashTable(updatedCourses);
+		int totalUnits = 0; 
+					
+		Iterator <Course> sortedArrayListIter = sortedArrayList.iterator(); 
+		while(sortedArrayListIter.hasNext()){
+			Course currentCourse = sortedArrayListIter.next(); 
+			
+			if(!hasPrerequisites(currentCourse)){
+				
+				if(currentCourse.getCorequisites().get(0).toLowerCase().equals("0".toLowerCase())){
+					
+					if(currentCourse.getUnits() + totalUnits <= weight){
+					
+						totalUnits = currentCourse.getUnits() + totalUnits;
+						
+						toCompleteClasses.add(currentCourse);
+					}
+					
+				}
+				
+				else{
+					
+					String coreq = currentCourse.getCorequisites().get(0).toLowerCase(); 
+					
+					int key = getCorequisiteLocation(updatedCourses, coreq); 
+					
+					if(key!=-1){
+						
+						if(totalUnits + currentCourse.getUnits() + updatedCourses.get(key).getUnits() <= weight)
+						{
+							
+							totalUnits = totalUnits + currentCourse.getUnits() + updatedCourses.get(key).getUnits(); 
+							
+							toCompleteClasses.add(currentCourse); 
+							
+							toCompleteClasses.add(updatedCourses.get(key)); 
+							
+						}
+						
+					}
+				}
+			}
+			
+		}
+
+		return toCompleteClasses;
+
+	}
+	
+	//Summary:		Creates a hastable of courses from a list of course numbers
+	//Input:		List of course numbers
+	//Output:		Hashtable of courses
+	public Hashtable<Integer, Course> getUpdatedCourses(ArrayList<Integer> majorCourses) {
+		Hashtable<Integer, Course> updatedCourses = new Hashtable<Integer, Course>();
+		Enumeration<Course> e = courses.elements();
+		while (e.hasMoreElements()) {
+			Course next = e.nextElement();
+			for (int majorCourse : majorCourses) {
+				if (next.getCourseNum() == majorCourse) {
+
+					updatedCourses.put(majorCourse, next);
+
+				}
+			}
+
+		}
+
+		return updatedCourses;
+	}
+	
+	//Summary: 		Reads a file and returns a list of course numbers
+	//Input: 		String containing the filename to read. 
+	//Output:		List of course numbers.
+	public static ArrayList<Integer> getMajorRequirements(String filename) {
+		ArrayList<Integer> tempArrayList = new ArrayList<Integer>();
+
+		try {
+			BufferedReader input = new BufferedReader(new FileReader(filename.toLowerCase()));
+			String line;
+
+			while ((line = input.readLine()) != null) {
+				tempArrayList.add(Integer.parseInt(line));
+			}
+
+			input.close();
+
+		} catch (IOException e) {
+			System.out.println("Error: File Not Found");
+		}
+
+		return tempArrayList;
+
+	}
+	//Summary: 		Reads "completedClasses.csv" and gets a list of integers
+	//Input:		N/A
+	//Output:		List of Integers that correspond to course numbers
+	public static ArrayList<Integer> getCompletedClasses() {
+		ArrayList<Integer> tempArrayList = new ArrayList<Integer>();
+
+		try {
+			BufferedReader input = new BufferedReader(new FileReader("completedClasses.csv"));
+			String line;
+
+			while ((line = input.readLine()) != null) {
+				tempArrayList.add(Integer.parseInt(line));
+			}
+
+			input.close();
+		} catch (IOException e) {
+			System.out.println("Error: File Not Found");
+		}
+
+		return tempArrayList;
+	}
 
     //constructor
     public CourseDB() {
@@ -119,7 +500,8 @@ class CourseDB implements Serializable{
             System.out.println("2) Modify Course");
             System.out.println("3) Delete Course");
             System.out.println("4) Import sample CSV file");
-            System.out.println("5) Return to previous menu");
+            System.out.println("5) Create course schedule");
+            System.out.println("6) Return to previous menu");
             System.out.print("Please select an action: ");
             choice = input.nextInt();
             input.nextLine();
@@ -142,6 +524,9 @@ class CourseDB implements Serializable{
                 break;
 
             case 5:
+            	createSchedule(); 
+                
+            case 6:
                 break;
 
             default:
