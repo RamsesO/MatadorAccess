@@ -243,6 +243,7 @@ public class ConsoleUI {
             System.out.println("ERROR: Unable to write profile database file\n");
         }
         */
+        System.out.println("Databases saved!");
     }
 
 	private static int login(Scanner input) {
