@@ -46,4 +46,51 @@ class ProfileDB implements Serializable{
         System.out.println("Manage Profile is not implemented yet");
     }
   
+   public void importData(String filename) {
+        try {
+            BufferedReader input = new BufferedReader(new FileReader(filename));
+            String line;
+            String[] parsedData;
+            String[] subset;
+            Course temp;
+
+            //Skip first line
+            input.readLine();
+            line = null;
+
+            while ((line=input.readLine())!=null){
+                parsedData = line.split(",");
+                temp = new Profile();
+
+                tmep.setName(parsedData[0]);
+                tmep.setAge(Integer.parsedData[1]);
+                tmep.setGender(parsedData[2]);
+                tmep.setID(Integer.parsedData[3]);
+                tmep.setEmail(parsedData[4]);
+                tmep.setDeclaredMajor(parsedData[5]);
+                tmep.setNumberOfUnits(Integer.parsedData[6]);
+                tmep.setGpa(Integer.parsedData[7]);
+                tmep.setTheYearEnrolled(Integer.parsedData[8]);
+                tmep.setExpectedGraduationYear(Integer.parsedData[9]);
+
+                subset = parsedData[10].split(";");
+                temp.setSchedule(new ArrayList<String>(Arrays.asList(subset)));
+                subset = parsedData[11].split(";");
+                temp.setCurrentEnrolledClasses(new ArrayList<String>(Arrays.asList(subset)));
+                subset = parsedData[12].split(";");
+                temp.setCompletedClasses(new ArrayList<String>(Arrays.asList(subset)));
+                subset = parsedData[13].split(";");
+                temp.setAwards(new ArrayList<String>(Arrays.asList(subset)));
+
+                    }
+            //alert user of successful file import
+            System.out.println("\nSuccessfully imported sampleCourses.csv!");
+        }
+        //handle nonexistent file/IO error
+        catch (IOException e) {
+            System.out.println("Error: File Not Found");
+        }
+
+     }
+  
 }
