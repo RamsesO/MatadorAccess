@@ -1,5 +1,5 @@
 
-import java.util.ArrayList;
+import java.util.*;
 
 class Profile{
     
@@ -208,3 +208,28 @@ class Profile{
     }
     
 }
+
+@Override
+public String toString(){
+    String str = "Name: "+name+" age: "+age+" gender: "+gender+"\n"
+                +"ID: "+id+"\n"
+                +"email: "+email+"\n"
+                +"major: "+declaredMajor+"\n"
+                +"number of units: "+numberOfUnits+" GPA: "+gpa+"\n"
+                +"the year enrolled:"+yearEnrolled+"\n"
+                +"expected graduation year: "+expectedGraduationYear+"\n"
+                +"schedule: "+nullCheck(schedule)+"\n"
+                +"currentEnrolledClasses: "+nullCheck(currentEnrolledClasses)+"\n"
+                +"completedClasses: "+completedClasses+"\n"
+                +"awards: "+awards+"\n"
+}
+
+
+private static String nullCheck(ArrayList<String> l) {
+        if(l == null) {
+            return "null";
+        }
+        else {
+            return l.toString();
+        }
+    }
