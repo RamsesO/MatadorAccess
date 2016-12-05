@@ -219,7 +219,8 @@ class Profile{
                 +"schedule: "+nullCheck(schedule)+"\n"
                 +"currentEnrolledClasses: "+nullCheck(currentEnrolledClasses)+"\n"
                 +"completedClasses: "+nullCheck(completedClasses)+"\n"
-                +"awards: "+nullCheck(awards)+"\n"
+                +"awards: "+nullCheck(awards)+"\n";
+        return str;
     }
 
 
