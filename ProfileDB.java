@@ -1,125 +1,177 @@
+/*---------------------------------------------------------------------------
+Module Name: ProfileDB (Profile Database Object w/ associated functions)
+Inputs: Profile objects, Assorted variable types representing Profile attributes
+Outputs: Profile objects, Hashtables containing Profile objects
+Submodules: viewProfile(), importData()
+
+
+Author: Ramses Ordonez
+Date: 11/9/16
+
+Reviewer: Ryan Vitacion
+Date: 11/27/16
+
+
+- Revision History -
+
+Programmer: Ramses Ordonez
+Date: 11/14/16
+Description of Changes: Created ProfileDB Class.
+Reviewer:
+Date of Review:
+
+Programmer: Ramses Ordonez
+Date: 11/16/16
+Description of Changes: Added importing and exporting of Profile objects via 
+csv.
+Reviewer:
+Date of Review:
+
+
+Programmer: Ramses Ordonez
+Date: 11/21/16
+Description of Changes: Removed importing and exporting of Profile objects via
+csv. Added importing and exporting of serialized Databases.
+Reviewer:
+Date of Review:
+---------------------------------------------------------------------------*/
 import java.util.Hashtable;
 import java.io.Serializable;
 
 class ProfileDB implements Serializable{
   
     private static final long serialVersionUID = 1902521367567782416L;
+    
+    //Hashtables to store Profiles with both integer and string keys
     private Hashtable<Integer, Profile> profiles;
     private Hashtable<String, Integer> stringTable;
-
+  
+    //constructor
     public ProfileDB(){
         profiles = new Hashtable<Integer, Profile>();
         stringTable = new Hashtable<String, Integer>();
     }
 
+    //search by Profile ID#
     public Profile search(Integer id){
         return profiles.get(id);
     }
     
+    //search by Profile name
     public Profile search(String name){
         return profiles.get(stringTable.get(name));
     }
     
+    //add Profile object to database
     public void add(Profile prof){
         profiles.put(prof.getId(), prof);
         stringTable.put(prof.getName(), prof.getId());
     }
 
+    //delete Profile object from database by Profile ID#
     public void remove(Integer id){
         String profileName = profiles.remove(id).getName();
         stringTable.remove(profileName);
     }
+  
+    //delete Profile object from database by Profile name
     public void remove(String profileName){
         profiles.remove(stringTable.get(profileName));
         stringTable.remove(profileName);
     }
     
+    //export Hashtable containing stored Profile objects
     public Hashtable export(){
         return profiles;
     }
     
-    public void viewProfile() {
-        System.out.println("View Profile is not implemented yet");
-    }
-
+    //Profile management menu
     public void manageProfile() {
         System.out.println("Manage Profile is not implemented yet");
     }
   
-  
-      public void viewProfile() {
-        Scanner input = new Scanner(System.in);
-        Profile temp = null;
-        String name = "";
-        int id = 0;
-        int option = 0;
+/*----------------------------------------------------------------------------
+Submodule Name: View Profile - viewProfile()
+Purpose: User is able to search for a Profile (if it exists) and have the 
+Profile displayed to them through the System.
+Input: None
+Output: None
+----------------------------------------------------------------------------*/
+    public void viewProfile() {
+      Scanner input = new Scanner(System.in);
+      Profile temp = null;
+      String name = "";
+      int id = 0;
+      int option = 0;
 
        
 
-        while (temp == null) {
+      while (temp == null) {
 
-            //prompt user for target course
-            System.out.print("Enter a name or number: ");
+          //prompt user for target course
+          System.out.print("Enter a name or number: ");
 
-            //search by course ID#
-            if (!input.hasNextInt()) {
-                name = input.nextLine();
-                temp = search(name);
+          //search by course ID#
+          if (!input.hasNextInt()) {
+              name = input.nextLine();
+              temp = search(name);
 
-                //if target course does not exist, alert user
-                if (temp == null) {
-                    System.out.println("Profile not found.");
-                    System.out.println("1) Search Again");
-                    System.out.println("2) Exit");
+              //if target course does not exist, alert user
+              if (temp == null) {
+                  System.out.println("Profile not found.");
+                  System.out.println("1) Search Again");
+                  System.out.println("2) Exit")
+                  while (!input.hasNextInt()) {
+                      System.out.print("Please enter a number: ");
+                      input.next();
+                  }
+                  option = input.nextInt()
+                  //handle invalid user input
+                  while (option != 1 && option != 2) {
+                      System.out.println("Invalid command please enter 1 or 2: ");
+                      option = input.nextInt();
+                  }
+                  if(option == 2) break;
+              }
+          }
 
-                    while (!input.hasNextInt()) {
-                        System.out.print("Please enter a number: ");
-                        input.next();
-                    }
-                    option = input.nextInt();
+          //search by course name
+          else {
+              id = input.nextInt();
+              temp = search(id);
 
-                    //handle invalid user input
-                    while (option != 1 && option != 2) {
-                        System.out.println("Invalid command please enter 1 or 2: ");
-                        option = input.nextInt();
-                    }
-                    if(option == 2) break;
-                }
-            }
+              //if target course does not exist, alert user
+              if (temp == null) {
+                  System.out.println("Profile not found.");
+                  System.out.println("1) Search Again");
+                  System.out.println("2) Exit")
+                  while (!input.hasNextInt()) {
+                      System.out.print("Please enter a number: ");
+                      input.next();
+                  }
+                  option = input.nextInt()
+                  //handle invalid user input
+                  while (option != 1 && option != 2) {
+                      System.out.println("Invalid command please enter 1 or 2: ");
+                      option = input.nextInt();
+                  }
+                  if(option == 2) break;
+              }
+          }
+      }
 
-            //search by course name
-            else {
-                id = input.nextInt();
-                temp = search(id);
+      //once target course is found, display relevant info
+      if (temp != null) {
+          System.out.println(temp.toString());
+      }
+  }
 
-                //if target course does not exist, alert user
-                if (temp == null) {
-                    System.out.println("Profile not found.");
-                    System.out.println("1) Search Again");
-                    System.out.println("2) Exit");
-
-                    while (!input.hasNextInt()) {
-                        System.out.print("Please enter a number: ");
-                        input.next();
-                    }
-                    option = input.nextInt();
-
-                    //handle invalid user input
-                    while (option != 1 && option != 2) {
-                        System.out.println("Invalid command please enter 1 or 2: ");
-                        option = input.nextInt();
-                    }
-                    if(option == 2) break;
-                }
-            }
-        }
-
-        //once target course is found, display relevant info
-        if (temp != null) {
-            System.out.println(temp.toString());
-        }
-    }
-  
+/*----------------------------------------------------------------------------
+Submodule Name: import Profile .csv file - importData()
+Purpose: Reads all Profile objects from a .csv file and adds them to the database
+Input: String filename - Name of .csv file
+Output: None
+----------------------------------------------------------------------------*/
    public void importData(String filename) {
         try {
             BufferedReader input = new BufferedReader(new FileReader(filename));
