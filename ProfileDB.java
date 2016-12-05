@@ -94,7 +94,7 @@ class ProfileDB implements Serializable{
 
                 //if target course does not exist, alert user
                 if (temp == null) {
-                    System.out.println("Course not found.");
+                    System.out.println("Profile not found.");
                     System.out.println("1) Search Again");
                     System.out.println("2) Exit");
 
@@ -126,7 +126,7 @@ class ProfileDB implements Serializable{
             String line;
             String[] parsedData;
             String[] subset;
-            Course temp;
+            Profile temp;
 
             //Skip first line
             input.readLine();
@@ -136,16 +136,16 @@ class ProfileDB implements Serializable{
                 parsedData = line.split(",");
                 temp = new Profile();
 
-                tmep.setName(parsedData[0]);
-                tmep.setAge(Integer.parsedData[1]);
-                tmep.setGender(parsedData[2]);
-                tmep.setID(Integer.parsedData[3]);
-                tmep.setEmail(parsedData[4]);
-                tmep.setDeclaredMajor(parsedData[5]);
-                tmep.setNumberOfUnits(Integer.parsedData[6]);
-                tmep.setGpa(Integer.parsedData[7]);
-                tmep.setTheYearEnrolled(Integer.parsedData[8]);
-                tmep.setExpectedGraduationYear(Integer.parsedData[9]);
+                temp.setName(parsedData[0]);
+                temp.setAge(Integer.parsedData[1]);
+                temp.setGender(parsedData[2]);
+                temp.setID(Integer.parsedData[3]);
+                temp.setEmail(parsedData[4]);
+                temp.setDeclaredMajor(parsedData[5]);
+                temp.setNumberOfUnits(Integer.parsedData[6]);
+                temp.setGpa(Integer.parsedData[7]);
+                temp.setTheYearEnrolled(Integer.parsedData[8]);
+                temp.setExpectedGraduationYear(Integer.parsedData[9]);
 
                 subset = parsedData[10].split(";");
                 temp.setSchedule(new ArrayList<String>(Arrays.asList(subset)));
