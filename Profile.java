@@ -207,10 +207,8 @@ class Profile{
         this.awards = awards;
     }
     
-}
-
-@Override
-public String toString(){
+    @Override
+    public String toString(){
     String str = "Name: "+name+" age: "+age+" gender: "+gender+"\n"
                 +"ID: "+id+"\n"
                 +"email: "+email+"\n"
@@ -222,10 +220,10 @@ public String toString(){
                 +"currentEnrolledClasses: "+nullCheck(currentEnrolledClasses)+"\n"
                 +"completedClasses: "+completedClasses+"\n"
                 +"awards: "+awards+"\n"
-}
+    }
 
 
-private static String nullCheck(ArrayList<String> l) {
+    private static String nullCheck(ArrayList<String> l) {
         if(l == null) {
             return "null";
         }
@@ -233,3 +231,7 @@ private static String nullCheck(ArrayList<String> l) {
             return l.toString();
         }
     }
+    
+}
+
+
