@@ -84,7 +84,7 @@ class ProfileDB implements Serializable{
 
                     }
             //alert user of successful file import
-            System.out.println("\nSuccessfully imported sampleCourses.csv!");
+            System.out.println("\nSuccessfully imported sampleProfile.csv!");
         }
         //handle nonexistent file/IO error
         catch (IOException e) {
