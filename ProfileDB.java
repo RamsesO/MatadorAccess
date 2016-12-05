@@ -46,6 +46,80 @@ class ProfileDB implements Serializable{
         System.out.println("Manage Profile is not implemented yet");
     }
   
+  
+      public void viewProfile() {
+        Scanner input = new Scanner(System.in);
+        Profile temp = null;
+        String name = "";
+        int id = 0;
+        int option = 0;
+
+       
+
+        while (temp == null) {
+
+            //prompt user for target course
+            System.out.print("Enter a name or number: ");
+
+            //search by course ID#
+            if (!input.hasNextInt()) {
+                name = input.nextLine();
+                temp = search(name);
+
+                //if target course does not exist, alert user
+                if (temp == null) {
+                    System.out.println("Profile not found.");
+                    System.out.println("1) Search Again");
+                    System.out.println("2) Exit");
+
+                    while (!input.hasNextInt()) {
+                        System.out.print("Please enter a number: ");
+                        input.next();
+                    }
+                    option = input.nextInt();
+
+                    //handle invalid user input
+                    while (option != 1 && option != 2) {
+                        System.out.println("Invalid command please enter 1 or 2: ");
+                        option = input.nextInt();
+                    }
+                    if(option == 2) break;
+                }
+            }
+
+            //search by course name
+            else {
+                id = input.nextInt();
+                temp = search(id);
+
+                //if target course does not exist, alert user
+                if (temp == null) {
+                    System.out.println("Course not found.");
+                    System.out.println("1) Search Again");
+                    System.out.println("2) Exit");
+
+                    while (!input.hasNextInt()) {
+                        System.out.print("Please enter a number: ");
+                        input.next();
+                    }
+                    option = input.nextInt();
+
+                    //handle invalid user input
+                    while (option != 1 && option != 2) {
+                        System.out.println("Invalid command please enter 1 or 2: ");
+                        option = input.nextInt();
+                    }
+                    if(option == 2) break;
+                }
+            }
+        }
+
+        //once target course is found, display relevant info
+        if (temp != null) {
+            System.out.println(temp.toString());
+        }
+    }
+  
    public void importData(String filename) {
         try {
             BufferedReader input = new BufferedReader(new FileReader(filename));
