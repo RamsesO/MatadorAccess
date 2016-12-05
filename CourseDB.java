@@ -138,8 +138,7 @@ class CourseDB implements Serializable{
             System.out.println("2) Modify Course");
             System.out.println("3) Delete Course");
             System.out.println("4) Import sample CSV file");
-            System.out.println("5) Create course schedule");
-            System.out.println("6) Return to previous menu");
+            System.out.println("5) Return to previous menu");
             System.out.print("Please select an action: ");
             choice = input.nextInt();
             input.nextLine();
@@ -160,11 +159,8 @@ class CourseDB implements Serializable{
             case 4:
                 importData("sampleCourses.csv");
                 break;
-
+            
             case 5:
-            	createSchedule();
-
-            case 6:
                 break;
 
             default:
