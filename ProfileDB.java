@@ -84,11 +84,6 @@ class ProfileDB implements Serializable{
     public Hashtable export(){
         return profiles;
     }
-    
-    //Profile management menu
-    public void manageProfile() {
-        System.out.println("Manage Profile is not implemented yet");
-    }
   
 /*----------------------------------------------------------------------------
 Submodule Name: View Profile - viewProfile()
