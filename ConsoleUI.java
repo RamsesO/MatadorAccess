@@ -112,8 +112,9 @@ public class ConsoleUI {
                     System.out.println("2) View Major Information");
                     System.out.println("3) View Profile");
                     System.out.println("4) Manage Profile");
-                    System.out.println("5) Logout");
-                    System.out.println("6) Exit");
+		    System.out.println("5) Create Course Schedule");
+                    System.out.println("6) Logout");
+                    System.out.println("7) Exit");
 
                     //Input
                     System.out.print("Enter a number: ");
@@ -136,11 +137,14 @@ public class ConsoleUI {
                         case 4:
                             profiles.manageProfile();
                             break;
-                        case 5:
+			case 5: 
+			    courses.createSchedule();
+                            break; 
+                        case 6:
                             System.out.println("You have logged out.");
                             credential = 0;
                             break;
-                        case 6:
+                        case 7:
                             System.out.println("You have exited MatadorAccess.");
                             exit = true;
                             break;
