@@ -85,88 +85,86 @@ class ProfileDB implements Serializable{
         return profiles;
     }
   
-/*----------------------------------------------------------------------------
-Submodule Name: View Profile - viewProfile()
-Purpose: User is able to search for a Profile (if it exists) and have the 
-Profile displayed to them through the System.
-Input: None
-Output: None
-----------------------------------------------------------------------------*/
+	/*----------------------------------------------------------------------------
+	Submodule Name: View Profile - viewProfile()
+	Purpose: User is able to search for a Profile (if it exists) and have the 
+	Profile displayed to them through the System.
+	Input: None
+	Output: None
+	----------------------------------------------------------------------------*/
     public void viewProfile() {
-      Scanner input = new Scanner(System.in);
-      Profile temp = null;
-      String name = "";
-      int id = 0;
-      int option = 0;
+		Scanner input = new Scanner(System.in);
+		Profile temp = null;
+		String name = "";
+		int id = 0;
+		int option = 0;
 
-       
+		while (temp == null) {
 
-      while (temp == null) {
+			//prompt user for target profile
+			System.out.print("Enter a name or number: ");
 
-          //prompt user for target course
-          System.out.print("Enter a name or number: ");
+			//search by profile ID#
+			if (!input.hasNextInt()) {
+				name = input.nextLine();
+				temp = search(name);
 
-          //search by course ID#
-          if (!input.hasNextInt()) {
-              name = input.nextLine();
-              temp = search(name);
+				//if target profile does not exist, alert user
+				if (temp == null) {
+					System.out.println("Profile not found.");
+					System.out.println("1) Search Again");
+					System.out.println("2) Exit")
+					while (!input.hasNextInt()) {
+						System.out.print("Please enter a number: ");
+						input.next();
+					}
+					option = input.nextInt()
+					//handle invalid user input
+					while (option != 1 && option != 2) {
+						System.out.println("Invalid command please enter 1 or 2: ");
+						option = input.nextInt();
+					}
+					if(option == 2) break;
+				}
+			}
 
-              //if target course does not exist, alert user
-              if (temp == null) {
-                  System.out.println("Profile not found.");
-                  System.out.println("1) Search Again");
-                  System.out.println("2) Exit")
-                  while (!input.hasNextInt()) {
-                      System.out.print("Please enter a number: ");
-                      input.next();
-                  }
-                  option = input.nextInt()
-                  //handle invalid user input
-                  while (option != 1 && option != 2) {
-                      System.out.println("Invalid command please enter 1 or 2: ");
-                      option = input.nextInt();
-                  }
-                  if(option == 2) break;
-              }
-          }
+			//search by profile name
+			else {
+				id = input.nextInt();
+				temp = search(id);
 
-          //search by course name
-          else {
-              id = input.nextInt();
-              temp = search(id);
+				//if target profile does not exist, alert user
+				if (temp == null) {
+					System.out.println("Profile not found.");
+					System.out.println("1) Search Again");
+					System.out.println("2) Exit")
+					while (!input.hasNextInt()) {
+						System.out.print("Please enter a number: ");
+						input.next();
+					}
+					option = input.nextInt()
+					//handle invalid user input
+					while (option != 1 && option != 2) {
+						System.out.println("Invalid command please enter 1 or 2: ");
+						option = input.nextInt();
+					}
+					if(option == 2) break;
+				}
+			}
+		}
 
-              //if target course does not exist, alert user
-              if (temp == null) {
-                  System.out.println("Profile not found.");
-                  System.out.println("1) Search Again");
-                  System.out.println("2) Exit")
-                  while (!input.hasNextInt()) {
-                      System.out.print("Please enter a number: ");
-                      input.next();
-                  }
-                  option = input.nextInt()
-                  //handle invalid user input
-                  while (option != 1 && option != 2) {
-                      System.out.println("Invalid command please enter 1 or 2: ");
-                      option = input.nextInt();
-                  }
-                  if(option == 2) break;
-              }
-          }
-      }
+		//once target course is found, display relevant info
+		if (temp != null) {
+			System.out.println(temp.toString());
+		}
+	}
 
-      //once target course is found, display relevant info
-      if (temp != null) {
-          System.out.println(temp.toString());
-      }
-  }
-
-/*----------------------------------------------------------------------------
-Submodule Name: import Profile .csv file - importData()
-Purpose: Reads all Profile objects from a .csv file and adds them to the database
-Input: String filename - Name of .csv file
-Output: None
-----------------------------------------------------------------------------*/
+	/*----------------------------------------------------------------------------
+	Submodule Name: import Profile .csv file - importData()
+	Purpose: Reads all Profile objects from a .csv file and adds them to the database
+	Input: String filename - Name of .csv file
+	Output: None
+	----------------------------------------------------------------------------*/
    public void importData(String filename) {
         try {
             BufferedReader input = new BufferedReader(new FileReader(filename));
