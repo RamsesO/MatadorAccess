@@ -218,8 +218,8 @@ class Profile{
                 +"expected graduation year: "+expectedGraduationYear+"\n"
                 +"schedule: "+nullCheck(schedule)+"\n"
                 +"currentEnrolledClasses: "+nullCheck(currentEnrolledClasses)+"\n"
-                +"completedClasses: "+completedClasses+"\n"
-                +"awards: "+awards+"\n"
+                +"completedClasses: "+nullCheck(completedClasses)+"\n"
+                +"awards: "+nullCheck(awards)+"\n"
     }
 
 
