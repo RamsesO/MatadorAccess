@@ -202,6 +202,7 @@ class ProfileDB implements Serializable{
                 temp.setAwards(new ArrayList<String>(Arrays.asList(subset)));
 
                     }
+	    this.add(temp);	
             //alert user of successful file import
             System.out.println("\nSuccessfully imported sampleProfile.csv!");
         }
