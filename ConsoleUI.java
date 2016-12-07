@@ -17,6 +17,7 @@ public class ConsoleUI {
             ObjectInputStream importcourses = new ObjectInputStream(readcourses);
             courses = (CourseDB)importcourses.readObject();
             readcourses.close();
+            System.out.println("CourseDB loaded!");
         } catch (FileNotFoundException e) {
             System.out.println("ERROR: Course database file not found...");
             courses = new CourseDB();
@@ -31,6 +32,7 @@ public class ConsoleUI {
             ObjectInputStream importmajors = new ObjectInputStream(readmajors);
             majors = (MajorDB)importmajors.readObject();
             readmajors.close();
+            System.out.println("MajorDB loaded!");
         } catch (FileNotFoundException e) {
             System.out.println("ERROR: Major database file not found...");
             majors = new MajorDB();
@@ -41,11 +43,11 @@ public class ConsoleUI {
             System.out.println("ERROR: Invalid major database type.\n");
         }
         
-        /*
         try (FileInputStream readprofiles = new FileInputStream("pdb.dat")) {
             ObjectInputStream importprofiles = new ObjectInputStream(readprofiles);
             profiles = (ProfileDB)importprofiles.readObject();
             readprofiles.close();
+            System.out.println("ProfileDB loaded!");
         } catch (FileNotFoundException e) {
             System.out.println("ERROR: Profile database file not found...");
             profiles = new ProfileDB();
@@ -55,7 +57,6 @@ public class ConsoleUI {
         } catch (ClassNotFoundException e) {
             System.out.println("ERROR: Invalid profile database type.\n");
         }
-        */
         
         Scanner input = new Scanner(System.in);
         int credential = 0;
@@ -236,7 +237,6 @@ public class ConsoleUI {
             System.out.println("ERROR: Unable to write major database file\n");
         }
         
-        /*
         try (FileOutputStream writeprofiles = new FileOutputStream("pdb.dat")) {
             ObjectOutputStream exportprofiles = new ObjectOutputStream(writeprofiles);
             exportprofiles.writeObject(profiles);
@@ -246,7 +246,7 @@ public class ConsoleUI {
         } catch (IOException e) {
             System.out.println("ERROR: Unable to write profile database file\n");
         }
-        */
+
         System.out.println("Databases saved!");
     }
 
@@ -256,9 +256,9 @@ public class ConsoleUI {
 		BufferedReader br = null;
 	    
 		// User input
-		System.out.println("\nEnter you username:");
+		System.out.print("\nEnter you username: ");
 			String username = input.next();
-		System.out.println("\nEnter you password:");
+		System.out.print("Enter you password: ");
 			String password = input.next();
 		
 		try {

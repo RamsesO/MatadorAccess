@@ -102,7 +102,7 @@ class MajorDB implements Serializable{
     		}
     	}
     	if(temp != null) {
-    		System.out.println(temp.toString());
+    		System.out.println("\n"+temp.toString());
     	}
         
     }

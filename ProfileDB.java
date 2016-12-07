@@ -35,8 +35,15 @@ csv. Added importing and exporting of serialized Databases.
 Reviewer:
 Date of Review:
 ---------------------------------------------------------------------------*/
-import java.util.Hashtable;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Scanner;
 
 class ProfileDB implements Serializable{
   
@@ -81,7 +88,7 @@ class ProfileDB implements Serializable{
     }
     
     //export Hashtable containing stored Profile objects
-    public Hashtable export(){
+    public Hashtable<Integer, Profile> export(){
         return profiles;
     }
   
@@ -99,6 +106,15 @@ class ProfileDB implements Serializable{
 		int id = 0;
 		int option = 0;
 
+		//display list of existing profiles in database
+        System.out.println("\nCurrently Registered Profiles:\n");
+        Enumeration<Profile> e = profiles.elements();
+        while (e.hasMoreElements()) {
+            Profile next = e.nextElement();
+            System.out.println(next.getId() + ": " + next.getName());
+        }
+        System.out.println();
+		
 		while (temp == null) {
 
 			//prompt user for target profile
@@ -113,12 +129,12 @@ class ProfileDB implements Serializable{
 				if (temp == null) {
 					System.out.println("Profile not found.");
 					System.out.println("1) Search Again");
-					System.out.println("2) Exit")
+					System.out.println("2) Exit");
 					while (!input.hasNextInt()) {
 						System.out.print("Please enter a number: ");
 						input.next();
 					}
-					option = input.nextInt()
+					option = input.nextInt();
 					//handle invalid user input
 					while (option != 1 && option != 2) {
 						System.out.println("Invalid command please enter 1 or 2: ");
@@ -137,12 +153,12 @@ class ProfileDB implements Serializable{
 				if (temp == null) {
 					System.out.println("Profile not found.");
 					System.out.println("1) Search Again");
-					System.out.println("2) Exit")
+					System.out.println("2) Exit");
 					while (!input.hasNextInt()) {
 						System.out.print("Please enter a number: ");
 						input.next();
 					}
-					option = input.nextInt()
+					option = input.nextInt();
 					//handle invalid user input
 					while (option != 1 && option != 2) {
 						System.out.println("Invalid command please enter 1 or 2: ");
@@ -155,10 +171,36 @@ class ProfileDB implements Serializable{
 
 		//once target course is found, display relevant info
 		if (temp != null) {
-			System.out.println(temp.toString());
+			System.out.println("\n"+temp.toString());
 		}
 	}
 
+    public void manageProfile() {
+        Scanner input = new Scanner(System.in);
+        int choice = -1;
+        while(choice != 2) {
+            System.out.println("\n- Profile Management");
+            System.out.println("1) Import sample CSV file");
+            System.out.println("2) Return to previous menu");
+            System.out.print("Please select an action: ");
+            choice = input.nextInt();
+            input.nextLine();
+            switch(choice) {
+
+                case 1:
+                    this.importData("sampleProfiles.csv");
+                    break;
+
+                case 2:
+                    break;
+    
+                default:
+                    System.out.println("Invalid selection!");
+                    break;
+            }
+        }
+    }
+    
 	/*----------------------------------------------------------------------------
 	Submodule Name: import Profile .csv file - importData()
 	Purpose: Reads all Profile objects from a .csv file and adds them to the database
@@ -182,15 +224,15 @@ class ProfileDB implements Serializable{
                 temp = new Profile();
 
                 temp.setName(parsedData[0]);
-                temp.setAge(Integer.parsedData[1]);
+                temp.setAge(Integer.parseInt(parsedData[1]));
                 temp.setGender(parsedData[2]);
-                temp.setID(Integer.parsedData[3]);
+                temp.setId(Integer.parseInt(parsedData[3]));
                 temp.setEmail(parsedData[4]);
                 temp.setDeclaredMajor(parsedData[5]);
-                temp.setNumberOfUnits(Integer.parsedData[6]);
-                temp.setGpa(Integer.parsedData[7]);
-                temp.setTheYearEnrolled(Integer.parsedData[8]);
-                temp.setExpectedGraduationYear(Integer.parsedData[9]);
+                temp.setNumberOfUnits(Integer.parseInt(parsedData[6]));
+                temp.setGpa(Double.parseDouble(parsedData[7]));
+                temp.setYearEnrolled(Integer.parseInt(parsedData[8]));
+                temp.setExpectedGraduationYear(Integer.parseInt(parsedData[9]));
 
                 subset = parsedData[10].split(";");
                 temp.setSchedule(new ArrayList<String>(Arrays.asList(subset)));
@@ -200,11 +242,11 @@ class ProfileDB implements Serializable{
                 temp.setCompletedClasses(new ArrayList<String>(Arrays.asList(subset)));
                 subset = parsedData[13].split(";");
                 temp.setAwards(new ArrayList<String>(Arrays.asList(subset)));
-
-                    }
-	    this.add(temp);	
-            //alert user of successful file import
-            System.out.println("\nSuccessfully imported sampleProfile.csv!");
+                
+                this.add(temp);
+              //alert user of successful file import
+                System.out.println("\nSuccessfully imported sampleProfile.csv!");
+            }
         }
         //handle nonexistent file/IO error
         catch (IOException e) {

@@ -1,7 +1,9 @@
 import java.io.*;
 import java.util.*;
 
-class Profile{
+class Profile implements Serializable{
+
+    private static final long serialVersionUID = -8991016895154320222L;
     
     private double gpa;
     private int numberOfUnits;
@@ -209,17 +211,19 @@ class Profile{
     
     @Override
     public String toString(){
-    String str = "Name: "+name+" age: "+age+" gender: "+gender+"\n"
+    String str = "Name: "+name+"\n"
+                +"Age: "+age+"\n"
+                +"Gender: "+gender+"\n"
                 +"ID: "+id+"\n"
-                +"email: "+email+"\n"
-                +"major: "+declaredMajor+"\n"
-                +"number of units: "+numberOfUnits+" GPA: "+gpa+"\n"
-                +"the year enrolled:"+yearEnrolled+"\n"
-                +"expected graduation year: "+expectedGraduationYear+"\n"
-                +"schedule: "+nullCheck(schedule)+"\n"
-                +"currentEnrolledClasses: "+nullCheck(currentEnrolledClasses)+"\n"
-                +"completedClasses: "+nullCheck(completedClasses)+"\n"
-                +"awards: "+nullCheck(awards)+"\n";
+                +"Email: "+email+"\n"
+                +"Major: "+declaredMajor+"\n"
+                +"Number of Units: "+numberOfUnits+" GPA: "+gpa+"\n"
+                +"Year Enrolled:"+yearEnrolled+"\n"
+                +"Expected Graduation Year: "+expectedGraduationYear+"\n"
+                +"Schedule: "+nullCheck(schedule)+"\n"
+                +"CurrentEnrolledClasses: "+nullCheck(currentEnrolledClasses)+"\n"
+                +"CompletedClasses: "+nullCheck(completedClasses)+"\n"
+                +"Awards: "+nullCheck(awards)+"\n";
         return str;
     }
 
