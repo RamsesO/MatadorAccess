@@ -62,7 +62,7 @@ public class ConsoleUI {
         int credential = 0;
         int option = 0;
         boolean exit = false;
-
+        String username = ""; 
         while (exit == false) {
             //Title
             System.out.println();
@@ -93,7 +93,9 @@ public class ConsoleUI {
                             majors.viewMajorInformation();
                             break;
                         case 3:
-                            credential = login(input);
+                        	String loginReturn = login(input);
+                            credential = Character.getNumericValue(loginReturn.charAt(loginReturn.length()-1));
+                            username = loginReturn.substring(0, loginReturn.length() - 1); 
                             break;
                         case 4:
                             System.out.println("You have exited MatadorAccess.");
@@ -113,7 +115,7 @@ public class ConsoleUI {
                     System.out.println("2) View Major Information");
                     System.out.println("3) View Profile");
                     System.out.println("4) Manage Profile");
-		    System.out.println("5) Create Course Schedule");
+                    System.out.println("5) Create Course Schedule");
                     System.out.println("6) Logout");
                     System.out.println("7) Exit");
 
@@ -138,8 +140,8 @@ public class ConsoleUI {
                         case 4:
                             profiles.manageProfile();
                             break;
-			case 5: 
-			    courses.createSchedule();
+                        case 5: 
+                        	courses.createSchedule(username, profiles,majors);
                             break; 
                         case 6:
                             System.out.println("You have logged out.");
@@ -250,7 +252,7 @@ public class ConsoleUI {
         System.out.println("Databases saved!");
     }
 
-	private static int login(Scanner input) {
+	private static String login(Scanner input) {
 		// Local Variables
 		String cvsSplitBy = ",";
 		BufferedReader br = null;
@@ -277,21 +279,21 @@ public class ConsoleUI {
 					if(loginInfo[2].equals("1")) {
 						System.out.println("\nYou are now logged in as student!\n");
 						br.close();
-						return 1;
+						return username +"1";
 					} else {
 						System.out.println("\nYou are now logged in as admin!\n");
 						br.close();
-						return 2;
+						return username + "2";
 					}		
 				}
 				
 			}
-			return 0;
+			return "0";
 		} 
 		
 		catch (IOException e) {			
 			e.printStackTrace();
-			return 0;		
+			return "0";		
 		}
 	} // END login(Scanner input)
 	

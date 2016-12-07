@@ -1,2 +1,3 @@
 Name,Age,Gender,Id,Email,DeclaredMajor,NumberOfUnits,Gpa,YearEnrolled,ExpectedGraduationYear,Schedule,CurrentEnrolledClasses,CompletedClasses,Awards
-Snoop Dogg,72,Male,1337,snoop@dogg.net,Memeology,30,0.420,2015,2099,VAPE 380;HIST 420;MATH 789,CHEM 989;MATH 976;PHYS 988,DANCE 956,Dean's List
+Snoop Dogg,72,Male,1337,snoop@dogg.net,Memeology,30,0.42,2015,2099,VAPE 380;HIST 420;MATH 789,CHEM 989;MATH 976;PHYS 988,DANCE 956,Dean's List
+drake,22,Male,69,drake@YMCMB,Computer Science,22,3.49,2016,2020,MUSIC101,MUSIC101,GENaturalSciences1;GEAnalyticalReading;GENaturalSciences2;GEMathematics;GEUSHistory2;GEUSHistory1,Rap God

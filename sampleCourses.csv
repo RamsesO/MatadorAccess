@@ -3,57 +3,62 @@ COMP110,College of Computer Science,1,3,0,MATH102/MATh103/MATH104/MATH105/MATH15
 COMP110L,College of Computer Science,2,1,0,MATH102/MATh103/MATH104/MATH105/MATH150A/MATH/255A,COMP110,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
 COMP122,College of Computer Science,3,1,0,MATH102/MATh103/MATH104/MATH105/MATH150A/MATH/255A,COMP122L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
 COMP122L,College of Computer Science,4,1,0,MATH102/MATh103/MATH104/MATH105/MATH150A/MATH/255A,COMP122,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP182,College of Computer Science,5,3,1,MATH102/MATH103/MATH104/MATH105/MATH150A/MATH/255A;COMP110,COMP182L,5,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP182L,College of Computer Science,6,1,1,MATH102/MATH103/MATH104/MATH105/MATH150A/MATH/255A;COMP110,COMP182,6,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP222,College of Computer Science,7,3,1,COMP122;COMP122L;COMP182;COMP182L,0,7,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP256,College of Computer Science,8,3,1,COMP182;COMP182L;MATH150A;PHIL230,COMP256L,8,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP256L,College of Computer Science,9,1,1,COMP182;COMP182L;MATH150A;PHIL230,COMP256L,9,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP282,College of Computer Science,10,3,1,COMP182;COMP182L;MATH150A,0,10,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP310,College of Computer Science,11,3,2,COMP256;COMP256L,0,11,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP322,College of Computer Science,12,3,2,COMP222,COMP322L,12,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP322L,College of Computer Science,13,1,2,COMP222,COMP322L,13,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP333,College of Computer Science,14,3,2,COMP282,0,14,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP380,College of Computer Science,15,2,2,COMP282/COMP270;PHIL230,COMP380L,15,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP380,College of Computer Science,16,1,2,COMP282/COMP270;PHIL230,COMP380,16,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP490,College of Computer Science,17,3,3,COMP380;COMP380L,COMP490L,17,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-COMP490L,College of Computer Science,18,1,3,COMP380;COMP380L,COMP490,18,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-MATH482,College of Mathematics,19,3,3,MATH150B;MATH262,0,20,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-MATH340,College of Mathematics,20,3,2,MATH150B,0,21,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-MATH341,College of Mathematics,21,3,2,MATH150B,0,22,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-MATH150A,College of Mathematics,22,5,0,GEMathematics,0,23,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-MATH150B,College of Mathematics,23,5,0,MATH150A,0,24,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-MATH262,College of Mathematics,24,3,1,MATH150B,0,25,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-PHIL230,College of Humanities,25,3,0,GEAnalyticalReading;GEMathematics/MATH210,0,26,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEAnalyticalReading,General Education,26,3,0,0,0,27,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GENaturalSciences1,General Education,27,4,0,0,0,28,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GENaturalSciences2,General Education,28,4,0,0,0,28,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEArtsAndHumanities1,General Education,29,3,0,0,0,29,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GESocialSciences1,General Education,30,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEArtsAndHumanities2,General Education,31,3,0,0,0,29,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GESocialSciences2,General Education,32,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GELifelongLearning,General Education,33,3,0,0,0,31,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEComparativeCulturalStudies1,General Education,34,3,0,0,0,32,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEUSHistory1,General Education,35,3,0,0,0,33,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEComparativeCulturalStudies2,General Education,36,3,0,0,0,32,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEUSHistory2,General Education,37,3,0,0,0,33,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GECriticalThinking,General Education,38,3,0,0,0,34,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEMathematics,General Education,39,3,0,0,0,35,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEOralCommunications,General Education,40,3,0,0,0,36,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-BIOL106,General Education,41,3,0,0,BIOL106L,37,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-BIOL106L,General Education,42,1,0,0,BIOL106,38,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-BIOL107,General Education,43,3,0,BIOL106;BIOL106L,BIOL107L,39,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-BIOL107L,General Education,44,1,0,BIOL106;BIOL106L,BIOL107,40,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-CHEM101,General Education,45,4,0,CPT;CHEM100,CHEM101L,41,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-CHEM101L,General Education,46,1,0,CPT;CHEM100,CHEM101,42,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-CHEM102,General Education,47,4,0,CHEM101;CHEM101L,CHEM102L,43,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-CHEM102L,General Education,48,1,0,CHEM101;CHEM101L,CHEM102,44,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-PHYS220A,General Education,49,3,0,MATH150A/MATH255A,0,45,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-PHYS220AL,General Education,50,3,0,MATH150A/MATH255A,0,46,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-PHYS220B,General Education,51,3,0,MATH150B/MATH255B;PHYS220A,0,47,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-PHYS220BL,General Education,52,3,0,MATH150B/MATH255B;PHYS220A,0,48,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEOL110,General Education,53,3,0,0,0,49,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEOL112,General Education,54,1,0,0,0,50,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEOG101,General Education,55,3,0,0,0,51,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEOG102,General Education,56,1,0,0,0,52,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEOL101,General Education,57,3,0,0,0,53,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
-GEOL102,General Education,58,1,0,0,0,54,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP182,College of Computer Science,5,3,1,MATH102/MATH103/MATH104/MATH105/MATH150A/MATH/255A;COMP110,COMP182L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP182L,College of Computer Science,6,1,1,MATH102/MATH103/MATH104/MATH105/MATH150A/MATH/255A;COMP110,COMP182,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP222,College of Computer Science,7,3,1,COMP122;COMP122L;COMP182;COMP182L,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP256,College of Computer Science,8,3,1,COMP182;COMP182L;MATH150A;PHIL230,COMP256L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP256L,College of Computer Science,9,1,1,COMP182;COMP182L;MATH150A;PHIL230,COMP256L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP282,College of Computer Science,10,3,1,COMP182;COMP182L;MATH150A,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP310,College of Computer Science,11,3,2,COMP256;COMP256L,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP322,College of Computer Science,12,3,2,COMP222,COMP322L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP322L,College of Computer Science,13,1,2,COMP222,COMP322L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP333,College of Computer Science,14,3,2,COMP282,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP380,College of Computer Science,15,2,2,COMP282/COMP270;PHIL230,COMP380L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP380,College of Computer Science,16,1,2,COMP282/COMP270;PHIL230,COMP380,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP490,College of Computer Science,17,3,3,COMP380;COMP380L,COMP490L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+COMP490L,College of Computer Science,18,1,3,COMP380;COMP380L,COMP490,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+MATH482,College of Mathematics,19,3,3,MATH150B;MATH262,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+MATH340,College of Mathematics,20,3,2,MATH150B,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+MATH341,College of Mathematics,21,3,2,MATH150B,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+MATH150A,College of Mathematics,22,5,0,GEMathematics,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+MATH150B,College of Mathematics,23,5,0,MATH150A,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+MATH262,College of Mathematics,24,3,1,MATH150B,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+PHIL230,College of Humanities,25,3,1,GEAnalyticalReading;GEMathematics/MATH210,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEAnalyticalReading,General Education,26,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GENaturalSciences1,General Education,27,4,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GENaturalSciences2,General Education,28,4,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEArtsAndHumanities1,General Education,29,3,1,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GESocialSciences1,General Education,30,3,1,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEArtsAndHumanities2,General Education,31,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GESocialSciences2,General Education,32,3,1,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GELifelongLearning,General Education,33,3,1,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEComparativeCulturalStudies1,General Education,34,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEUSHistory1,General Education,35,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEComparativeCulturalStudies2,General Education,36,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEUSHistory2,General Education,37,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GECriticalThinking,General Education,38,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEMathematics,General Education,39,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEOralCommunications,General Education,40,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+BIOL106,General Education,41,3,0,0,BIOL106L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+BIOL106L,General Education,42,1,0,0,BIOL106,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+BIOL107,General Education,43,3,0,BIOL106;BIOL106L,BIOL107L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+BIOL107L,General Education,44,1,0,BIOL106;BIOL106L,BIOL107,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+CHEM101,General Education,45,4,0,CPT;CHEM100,CHEM101L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+CHEM101L,General Education,46,1,0,CPT;CHEM100,CHEM101,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+CHEM102,General Education,47,4,0,CHEM101;CHEM101L,CHEM102L,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+CHEM102L,General Education,48,1,0,CHEM101;CHEM101L,CHEM102,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+PHYS220A,General Education,49,3,0,MATH150A/MATH255A,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+PHYS220AL,General Education,50,3,0,MATH150A/MATH255A,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+PHYS220B,General Education,51,3,0,MATH150B/MATH255B;PHYS220A,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+PHYS220BL,General Education,52,3,0,MATH150B/MATH255B;PHYS220A,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEOL110,General Education,53,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEOL112,General Education,54,1,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEOG101,General Education,55,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEOG102,General Education,56,1,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEOL101,General Education,57,3,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+GEOL102,General Education,58,1,0,0,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+SENIORELECTIVE1,College of Computer Science,59,3,3,COMP380;COMP380L;COMP322,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+SENIORELECTIVE2,College of Computer Science,60,3,3,COMP380;COMP380L;COMP322,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+SENIORELECTIVE3,College of Computer Science,61,3,3,COMP380;COMP380L;COMP322,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+SENIORELECTIVE4,College of Computer Science,62,3,3,COMP380;COMP380L;COMP322,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science
+SENIORELECTIVE5,College of Computer Science,63,3,3,COMP380;COMP380L;COMP322,0,30,3,13,0.5,0.69,0.8,0.01,0.99,3.2,John Doe,Computer Science,Computer Science

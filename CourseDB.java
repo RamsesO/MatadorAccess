@@ -668,29 +668,29 @@ Input: None
 Output: None
 ----------------------------------------------------------------------------*/
 
-	public void createSchedule() {
+	public void createSchedule(String username, ProfileDB profiles, MajorDB majors) {
 
-		ArrayList<Integer> majorCourses = new ArrayList<Integer>();
+		ArrayList<String> majorCourses = new ArrayList<String>();
 
-		ArrayList<Integer> completedClassesInteger = new ArrayList<Integer>();
+		ArrayList<String> completedClasses = new ArrayList<String>();
 
 		Hashtable<Integer, Course> updatedCourses = new Hashtable<Integer, Course>();
 
 		ArrayList<Course> toCompleteClasses = new ArrayList<Course>();
 
-		completedClassesInteger = getCompletedClasses();
-
+		completedClasses = getCompletedClasses(profiles, username);
+		
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Please enter the major you wish to study.");
 
 		String major = input.nextLine();
 
-		majorCourses = getMajorRequirements(major + ".csv");
+		majorCourses = getMajorRequirements(major, majors);
 
-		majorCourses.removeAll(completedClassesInteger);
+		majorCourses.removeAll(getListByCourseNum(completedClasses));
 
-		ArrayList<Course> completedClassesCourse = updateCoursesWithPreviouslyTakenClasses(completedClassesInteger);
+		ArrayList<Course> completedClassesCourse = updateCoursesWithPreviouslyTakenClasses(completedClasses);
 
 		updatedCourses = getUpdatedCourses(majorCourses);
 
@@ -737,6 +737,29 @@ Output: None
 
 	}
 
+	public ArrayList<String> getListByCourseNum(ArrayList<String> completedClasses) {
+	
+		ArrayList<String> tempArrayList = new ArrayList<String>();
+		
+		Enumeration<Course> e = courses.elements();
+		while (e.hasMoreElements()) {
+			Course next = e.nextElement();
+			
+			for (String classes : completedClasses) {
+				
+				if (next.getName().toLowerCase().equals(classes.toLowerCase())) {
+
+					tempArrayList.add(Integer.toString(next.getCourseNum())); 
+
+				}
+			}
+
+		} 
+		
+		
+	return tempArrayList;
+}
+
 	// Summary: This method updates the hashtable that contains classes that need
     //          to be taken with the classes that have already been taken
 	// Input: Hashtable containing all the classes that need to be scheduled
@@ -768,7 +791,7 @@ Output: None
 	// Summary: 	Creates  a List of courses from a list of course numbers
 	// Input: 		List of course numbers of classes already taken
 	// Output: 		List of courses
-	public ArrayList<Course> updateCoursesWithPreviouslyTakenClasses(ArrayList<Integer> completedClasses){
+	public ArrayList<Course> updateCoursesWithPreviouslyTakenClasses(ArrayList<String> completedClasses){
 
 		ArrayList<Course> prevCompletedClasses = new ArrayList<Course>();
 
@@ -776,11 +799,11 @@ Output: None
 		while (e.hasMoreElements()) {
 			Course next = e.nextElement();
 
-			Iterator<Integer> completedClassesIter = completedClasses.iterator();
+			Iterator<String> completedClassesIter = completedClasses.iterator();
 			while(completedClassesIter.hasNext()){
-				Integer currentCourseNumber = completedClassesIter.next();
+				String currentCourseName = completedClassesIter.next();
 
-				if (next.getCourseNum() == currentCourseNumber){
+				if (next.getName().toLowerCase().equals(currentCourseName.toLowerCase())){
 					prevCompletedClasses.add(next);
 				}
 			}
@@ -967,15 +990,19 @@ Output: None
 	//Summary: Creates a hastable of courses from a list of course numbers
 	//Input: List of course numbers
 	//Output: Hashtable of courses
-	public Hashtable<Integer, Course> getUpdatedCourses(ArrayList<Integer> majorCourses) {
+	public Hashtable<Integer, Course> getUpdatedCourses(ArrayList<String> majorCourses) {
 		Hashtable<Integer, Course> updatedCourses = new Hashtable<Integer, Course>();
 		Enumeration<Course> e = courses.elements();
 		while (e.hasMoreElements()) {
 			Course next = e.nextElement();
-			for (int majorCourse : majorCourses) {
-				if (next.getCourseNum() == majorCourse) {
+			
+			String courseNum = Integer.toString(next.getCourseNum()); 
+			
+			for (String majorCourse : majorCourses) {
+				
+				if (courseNum.toLowerCase().equals(majorCourse.toLowerCase())) {
 
-					updatedCourses.put(majorCourse, next);
+					updatedCourses.put(next.getCourseNum(), next);
 
 				}
 			}
@@ -988,47 +1015,46 @@ Output: None
 	//Summary: Reads a file and returns a list of course numbers
 	//Input: String containing the filename to read.
 	//Output: List of course numbers.
-	public static ArrayList<Integer> getMajorRequirements(String filename) {
-		ArrayList<Integer> tempArrayList = new ArrayList<Integer>();
-
-		try {
-			BufferedReader input = new BufferedReader(new FileReader(filename.toLowerCase()));
-			String line;
-
-			while ((line = input.readLine()) != null) {
-				tempArrayList.add(Integer.parseInt(line));
-			}
-
-			input.close();
-
-		} catch (IOException e) {
-			System.out.println("Error: File Not Found");
+	public static ArrayList<String> getMajorRequirements(String majorName, MajorDB majors) {
+		ArrayList<String> tempArrayList = new ArrayList<String>();
+		
+		Major temp; 
+		
+		try{
+			
+			temp = majors.search(majorName); 
+			
+			tempArrayList = temp.getCourses(); 
+			
+			return tempArrayList; 
 		}
-
-		return tempArrayList;
+		catch (Exception e){
+			
+			return tempArrayList; 
+		}
 
 	}
 
 	//Summary: Reads "completedClasses.csv" and gets a list of integers
 	//Input: N/A
 	//Output: List of Integers that correspond to course numbers
-	public static ArrayList<Integer> getCompletedClasses() {
-		ArrayList<Integer> tempArrayList = new ArrayList<Integer>();
-
-		try {
-			BufferedReader input = new BufferedReader(new FileReader("completedClasses.csv"));
-			String line;
-
-			while ((line = input.readLine()) != null) {
-				tempArrayList.add(Integer.parseInt(line));
-			}
-
-			input.close();
-		} catch (IOException e) {
-			System.out.println("Error: File Not Found");
+	public static ArrayList<String> getCompletedClasses(ProfileDB profiles, String username) {
+		ArrayList<String> tempArrayList = new ArrayList<String>();
+		
+		Profile temp; 
+		try{
+			temp = profiles.search(username); 
+			
+			tempArrayList = temp.getCompletedClasses(); 
+			
+			return tempArrayList; 
+			
+		} catch(Exception e){
+			
+			return tempArrayList; 
+			
 		}
-
-		return tempArrayList;
+		
 	}
 
 /*----------------------------------------------------------------------------
@@ -1095,4 +1121,5 @@ Output: None
             System.out.println("Error: File Not Found");
         }
     }
+
 }
